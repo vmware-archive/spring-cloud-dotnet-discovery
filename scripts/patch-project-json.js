@@ -39,7 +39,7 @@ jsonfile.readFile(file, function (err, project) {
     project.version = version;
 
     // Patch dependencies
-    project.dependencie['SteelToe.Discovery.Client'] = dependsVersion;
+    project.dependencies['SteelToe.Discovery.Client'] = dependsVersion;
 
     jsonfile.writeFile(file, project, {spaces: 2}, function(err) {
         if (err)
