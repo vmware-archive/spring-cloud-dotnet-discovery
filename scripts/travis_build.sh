@@ -6,6 +6,6 @@ dnu restore
 cd ../test
 dnu restore
 cd ..
-cd src/Pivotal.Extensions.Configuration.ConfigServer
+cd src/Pivotal.Discovery.Client
 dnu pack --framework dnxcore50 --configuration Release
 cd ../..

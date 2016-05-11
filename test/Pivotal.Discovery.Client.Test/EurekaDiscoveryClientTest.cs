@@ -31,7 +31,7 @@ namespace Pivotal.Discovery.Client.Test
             EurekaClientOptions clientOptions = null;
 
             // Act and Assert
-            var ex = Assert.Throws<ArgumentNullException>(() => new EurekaDiscoveryClient(clientOptions, null));
+            var ex = Assert.Throws<ArgumentNullException>(() => new EurekaDiscoveryClient(clientOptions, null, null));
             Assert.Contains(nameof(clientOptions), ex.Message);
         }
 
@@ -46,7 +46,7 @@ namespace Pivotal.Discovery.Client.Test
 
             var instConfig = new EurekaInstanceOptions();
 
-            var client = new EurekaDiscoveryClient(clientConfig, instConfig);
+            var client = new EurekaDiscoveryClient(clientConfig, instConfig, null);
 
             Assert.NotNull(client.Client);
             Assert.NotNull(client.ClientConfig);
@@ -71,7 +71,7 @@ namespace Pivotal.Discovery.Client.Test
             };
             var instConfig = new EurekaInstanceOptions();
 
-            var client = new EurekaDiscoveryClient(clientConfig, instConfig);
+            var client = new EurekaDiscoveryClient(clientConfig, instConfig, null);
 
             Assert.NotNull(client.Client);
             Assert.NotNull(client.ClientConfig);

@@ -39,11 +39,16 @@ namespace Pivotal.Discovery.Client
 
         public static IServiceCollection AddDiscoveryClient(this IServiceCollection services, IConfiguration config)
         {
+            if (services == null)
+            {
+                throw new ArgumentNullException(nameof(services));
+            }
 
             if (config == null)
             {
                 throw new ArgumentNullException(nameof(config));
             }
+
             ConfigureOptions<DiscoveryOptions> configOptions = new DiscoveryOptionsFromConfigSetup(config);
             return ST.DiscoveryServiceCollectionExtensions.AddDiscoveryClient(services, typeof(IDiscoveryClient), configOptions, DiscoveryClientFactory.CreateDiscoveryClient);
 

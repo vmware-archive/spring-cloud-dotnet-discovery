@@ -16,13 +16,18 @@ if (!version) {
 }
 
 var lastDash = version.lastIndexOf("-");
+var buildNumber = version.substring(lastDash + 1, version.length);
+var num = "00000000" + parseInt(buildNumber);
+buildNumber = num.substr(num.length-5);  
+
 var dependsVersion = version.substring(0, lastDash) + '-*';
     
 if (tag) {
     // Turn version into tag + '-' + buildnumber
-    var buildNumber = version.substring(lastDash + 1, version.length);
     version = tag + '-' + buildNumber;
-}
+} else {
+    version = version.substring(0, lastDash) + '-' + buildNumber;
+}    
     
 
 jsonfile.readFile(file, function (err, project) {
@@ -34,8 +39,7 @@ jsonfile.readFile(file, function (err, project) {
     project.version = version;
 
     // Patch dependencies
-    project['SteelToe.Extensions.Configuration.CloudFoundry'] = dependsVersion;
-    project['SteelToe.Extensions.Configuration.ConfigServer'] = dependsVersion;    
+    project.dependencie['SteelToe.Discovery.Client'] = dependsVersion;
 
     jsonfile.writeFile(file, project, {spaces: 2}, function(err) {
         if (err)

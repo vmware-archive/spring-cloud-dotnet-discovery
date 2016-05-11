@@ -24,18 +24,18 @@ using System.Net.Security;
 using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json.Linq;
-using ST = SteelToe.Discovery.Eureka.Transport;
+using STT = SteelToe.Discovery.Eureka.Transport;
 using SteelToe.Discovery.Eureka;
 
 namespace Pivotal.Discovery.Client
 {
-    public class EurekaHttpClient : ST.EurekaHttpClient
+    public class EurekaHttpClient : STT.EurekaHttpClient
     {
-        internal EurekaHttpClient(IEurekaClientConfig config, ILoggerFactory logFactory = null) : base(config, logFactory)
+        public EurekaHttpClient(IEurekaClientConfig config, ILoggerFactory logFactory = null) : base(config, logFactory)
         {
         }
 
-        internal protected override HttpRequestMessage GetRequestMessage(HttpMethod method, Uri requestUri)
+        protected override HttpRequestMessage GetRequestMessage(HttpMethod method, Uri requestUri)
         {
             var request = new HttpRequestMessage(method, requestUri);
             var config = _config as EurekaClientOptions;

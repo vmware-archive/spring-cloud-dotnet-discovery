@@ -24,18 +24,14 @@ namespace Pivotal.Discovery.Client.Test
 {
     public class DiscoveryServiceCollectionExtensionsTest : AbstractBaseTest
     {
-        public DiscoveryServiceCollectionExtensionsTest()
+        public DiscoveryServiceCollectionExtensionsTest() :base()
         {
-            ApplicationInfoManager.Instance.InstanceInfo = null;
-            ApplicationInfoManager.Instance.InstanceConfig = null;
-            DiscoveryManager.Instance.ClientConfig = null;
-            DiscoveryManager.Instance.Client = null;
-            DiscoveryManager.Instance.InstanceConfig = null;
         }
 
         [Fact]
         public void AddDiscoveryClient_ThrowsIfServiceCollectionNull()
         {
+            Console.WriteLine("AddDiscoveryClient_ThrowsIfServiceCollectionNull");
             // Arrange
             IServiceCollection services = null;
             IConfigurationRoot config = null;
@@ -54,6 +50,7 @@ namespace Pivotal.Discovery.Client.Test
         [Fact]
         public void AddDiscoveryClient_ThrowsIfConfigurtionNull()
         {
+            Console.WriteLine("AddDiscoveryClient_ThrowsIfConfigurtionNull");
             // Arrange
             IServiceCollection services = new ServiceCollection();
             IConfigurationRoot config = null;
@@ -105,6 +102,7 @@ namespace Pivotal.Discovery.Client.Test
         [Fact]
         public void AddDiscoveryClient_WithEurekaConfig_AddsDiscoveryClient()
         {
+
             // Arrange
             var appsettings = @"
 {
@@ -139,6 +137,7 @@ namespace Pivotal.Discovery.Client.Test
         [Fact]
         public void AddDiscoveryClient_WithNoEurekaConfig_AddsDiscoveryClient_UnknownClientType()
         {
+
             // Arrange
             var appsettings = @"
 {

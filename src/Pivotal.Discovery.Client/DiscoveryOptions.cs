@@ -20,6 +20,10 @@ namespace Pivotal.Discovery.Client
 {
     public class DiscoveryOptions : ST.DiscoveryOptions
     {
+        public DiscoveryOptions() :base()
+        {
+        }
+
         public new DiscoveryClientType ClientType
         {
             get
