@@ -161,6 +161,25 @@ namespace Pivotal.Discovery.Client.Test
 {
 'vcap': {
     'application': {
+        'limits': {
+        'fds': 16384,
+        'mem': 512,
+        'disk': 1024
+        },
+        'application_name': 'foo',
+        'application_uris': [
+        'foo.apps.testcloud.com'
+        ],
+        'name': 'foo',
+        'space_name': 'test',
+        'space_id': '98c627e7-f559-46a4-9032-88cab63f8249',
+        'uris': [
+            'foo.apps.testcloud.com'
+        ],
+        'users': null,
+        'version': '4a439db9-4a82-47a3-aeea-8240465cff8e',
+        'application_version': '4a439db9-4a82-47a3-aeea-8240465cff8e',
+        'application_id': 'ac923014-93a5-4aee-b934-a043b241868b',
         'instance_id': 'instance_id'
     },
     'services': {
@@ -243,7 +262,7 @@ namespace Pivotal.Discovery.Client.Test
             Assert.True(co.AllowRedirects);
             Assert.Equal(100, co.InstanceInfoReplicationIntervalSeconds);
             Assert.Equal(100, co.EurekaServerConnectTimeoutSeconds);
-            Assert.Equal("https://eureka-6a1b81f5-79e2-4d14-a86b-ddf584635a60.apps.testcloud.com", co.EurekaServerServiceUrls);
+            Assert.Equal("https://eureka-6a1b81f5-79e2-4d14-a86b-ddf584635a60.apps.testcloud.com/eureka/", co.EurekaServerServiceUrls);
             Assert.Equal(100, co.RegistryFetchIntervalSeconds);
             Assert.Equal("registryRefreshSingleVipAddress", co.RegistryRefreshSingleVipAddress);
             Assert.True(co.ShouldDisableDelta);
@@ -261,11 +280,11 @@ namespace Pivotal.Discovery.Client.Test
             Assert.NotNull(ro);
 
 
-            Assert.Equal("instance_id", ro.InstanceId);
+            Assert.Equal("foo.apps.testcloud.com:instance_id", ro.InstanceId);
             Assert.Equal("appName", ro.AppName);
             Assert.Equal("appGroup", ro.AppGroupName);
             Assert.True(ro.IsInstanceEnabledOnInit);
-            Assert.Equal(100, ro.NonSecurePort);
+            Assert.Equal(80, ro.NonSecurePort);
             Assert.Equal(100, ro.SecurePort);
             Assert.True(ro.IsNonSecurePortEnabled);
             Assert.True(ro.SecurePortEnabled);
@@ -285,9 +304,10 @@ namespace Pivotal.Discovery.Client.Test
 
             var map = ro.MetadataMap;
             Assert.NotNull(map);
-            Assert.Equal(2, map.Count);
+            Assert.Equal(3, map.Count);
             Assert.Equal("bar", map["foo"]);
             Assert.Equal("foo", map["bar"]);
+            Assert.Equal("instance_id", map["instanceId"]);
 
         }
 
@@ -434,7 +454,7 @@ namespace Pivotal.Discovery.Client.Test
             Assert.True(co.AllowRedirects);
             Assert.Equal(100, co.InstanceInfoReplicationIntervalSeconds);
             Assert.Equal(100, co.EurekaServerConnectTimeoutSeconds);
-            Assert.Equal("https://eureka-6a1b81f5-79e2-4d14-a86b-ddf584635a60.apps.testcloud.com", co.EurekaServerServiceUrls);
+            Assert.Equal("https://eureka-6a1b81f5-79e2-4d14-a86b-ddf584635a60.apps.testcloud.com/eureka/", co.EurekaServerServiceUrls);
             Assert.Equal(100, co.RegistryFetchIntervalSeconds);
             Assert.Equal("registryRefreshSingleVipAddress", co.RegistryRefreshSingleVipAddress);
             Assert.True(co.ShouldDisableDelta);
@@ -452,11 +472,11 @@ namespace Pivotal.Discovery.Client.Test
             Assert.NotNull(ro);
 
 
-            Assert.Equal("instance_id", ro.InstanceId);
+            Assert.Equal("foo.apps.testcloud.com:instance_id", ro.InstanceId);
             Assert.Equal("foo", ro.AppName);
             Assert.Equal("appGroup", ro.AppGroupName);
             Assert.True(ro.IsInstanceEnabledOnInit);
-            Assert.Equal(100, ro.NonSecurePort);
+            Assert.Equal(80, ro.NonSecurePort);
             Assert.Equal(100, ro.SecurePort);
             Assert.True(ro.IsNonSecurePortEnabled);
             Assert.True(ro.SecurePortEnabled);
@@ -476,9 +496,10 @@ namespace Pivotal.Discovery.Client.Test
 
             var map = ro.MetadataMap;
             Assert.NotNull(map);
-            Assert.Equal(2, map.Count);
+            Assert.Equal(3, map.Count);
             Assert.Equal("bar", map["foo"]);
             Assert.Equal("foo", map["bar"]);
+            Assert.Equal("instance_id", map["instanceId"]);
         }
 
     }
