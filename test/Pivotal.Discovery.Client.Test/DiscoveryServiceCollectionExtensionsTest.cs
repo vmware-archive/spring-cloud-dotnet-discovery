@@ -19,6 +19,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using Xunit;
+using System.IO;
 
 namespace Pivotal.Discovery.Client.Test
 {
@@ -120,10 +121,11 @@ namespace Pivotal.Discovery.Client.Test
     }
 }";
 
-
+            var basePath = Path.GetTempPath();
             var path = TestHelpers.CreateTempFile(appsettings);
             var configurationBuilder = new ConfigurationBuilder();
-            configurationBuilder.AddJsonFile(path);
+            configurationBuilder.SetBasePath(basePath);
+            configurationBuilder.AddJsonFile(Path.GetFileName(path));
             var config = configurationBuilder.Build();
 
             var services = new ServiceCollection();
@@ -147,10 +149,11 @@ namespace Pivotal.Discovery.Client.Test
         },
     }
 }";
-
+            var basePath = Path.GetTempPath();
             var path = TestHelpers.CreateTempFile(appsettings);
             var configurationBuilder = new ConfigurationBuilder();
-            configurationBuilder.AddJsonFile(path);
+            configurationBuilder.SetBasePath(basePath);
+            configurationBuilder.AddJsonFile(Path.GetFileName(path));
             var config = configurationBuilder.Build();
 
             var services = new ServiceCollection();

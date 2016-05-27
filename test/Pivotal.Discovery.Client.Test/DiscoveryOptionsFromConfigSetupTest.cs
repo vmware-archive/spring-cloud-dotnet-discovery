@@ -17,6 +17,7 @@
 using Microsoft.Extensions.Configuration;
 using SteelToe.Extensions.Configuration;
 using System;
+using System.IO;
 using Xunit;
 
 namespace Pivotal.Discovery.Client.Test
@@ -89,10 +90,11 @@ namespace Pivotal.Discovery.Client.Test
     }
     }
 }";
-
+            var basePath = Path.GetTempPath();
             var path = TestHelpers.CreateTempFile(appsettings);
             var configurationBuilder = new ConfigurationBuilder();
-            configurationBuilder.AddJsonFile(path);
+            configurationBuilder.SetBasePath(basePath);
+            configurationBuilder.AddJsonFile(Path.GetFileName(path));
             var config = configurationBuilder.Build();
 
             var options = new DiscoveryOptions();
@@ -242,10 +244,11 @@ namespace Pivotal.Discovery.Client.Test
     }
     }
 }";
-
+            var basePath = Path.GetTempPath();
             var path = TestHelpers.CreateTempFile(appsettings);
             var configurationBuilder = new ConfigurationBuilder();
-            configurationBuilder.AddJsonFile(path);
+            configurationBuilder.SetBasePath(basePath);
+            configurationBuilder.AddJsonFile(Path.GetFileName(path));
             //configurationBuilder.AddCloudFoundry();
             var config = configurationBuilder.Build();
 
@@ -435,9 +438,11 @@ namespace Pivotal.Discovery.Client.Test
 }";
             Environment.SetEnvironmentVariable("VCAP_APPLICATION", vcap_application);
             Environment.SetEnvironmentVariable("VCAP_SERVICES", vcap_services);
+            var basePath = Path.GetTempPath();
             var path = TestHelpers.CreateTempFile(appsettings);
             var configurationBuilder = new ConfigurationBuilder();
-            configurationBuilder.AddJsonFile(path);
+            configurationBuilder.SetBasePath(basePath);
+            configurationBuilder.AddJsonFile(Path.GetFileName(path));
             configurationBuilder.AddCloudFoundry();
             var config = configurationBuilder.Build();
 
