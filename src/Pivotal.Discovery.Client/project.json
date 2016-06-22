@@ -44,6 +44,6 @@
     "Microsoft.Extensions.Options.ConfigurationExtensions": "1.0.0-rc2-final",
     "Microsoft.Extensions.Configuration.Binder": "1.0.0-rc2-final",
     "Newtonsoft.Json": "8.0.3",
-    "SteelToe.Discovery.Client": "1.0.0-dev-*"
+    "SteelToe.Discovery.Client": "1.0.0-*"
    }
   }
