@@ -111,7 +111,7 @@ public class Startup {
     ....
 ```
 ## Add and Use the Discovery Client 
-The next step is to Add and Use the Discovery Client.  You do these two things in  `ConfigureServices(..)` and the `Configure(..)` methods of the startup class:
+The next step is to Add and Use the Discovery Client.  You do these two things in  `ConfigureServices(..)` and the `Configure(..)` methods of the startup class.  The AddDiscoveryClient() call configures and adds the client to the ServiceCollection and the UseDiscoveryClient() call starts the DiscoveryClient (i.e. registers/fetches services).
 ```
 #using Pivotal.Discovery.Client;
 
