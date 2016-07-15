@@ -44,6 +44,7 @@
     "Microsoft.Extensions.Options.ConfigurationExtensions": "1.0.0",
     "Microsoft.Extensions.Configuration.Binder": "1.0.0",
     "Newtonsoft.Json": "9.0.1",
-    "SteelToe.Discovery.Client": "1.0.0-*"
-   }
+    "SteelToe.CloudFoundry.Connector": "1.0.0-dev-*",
+    "SteelToe.Discovery.Client": "1.0.0-dev-*"
+  }
   }

@@ -15,6 +15,7 @@
 //
 
 using SteelToe.Discovery.Eureka;
+using System;
 
 namespace Pivotal.Discovery.Client.Test
 {
@@ -22,12 +23,13 @@ namespace Pivotal.Discovery.Client.Test
     {
         public AbstractBaseTest()
         {
+            Environment.SetEnvironmentVariable("VCAP_APPLICATION", null);
+            Environment.SetEnvironmentVariable("VCAP_SERVICES", null);
             ApplicationInfoManager.Instance.InstanceInfo = null;
             ApplicationInfoManager.Instance.InstanceConfig = null;
             DiscoveryManager.Instance.ClientConfig = null;
             DiscoveryManager.Instance.Client = null;
             DiscoveryManager.Instance.InstanceConfig = null;
-            DiscoveryClientFactory._discoveryClient = null;
         }
     }
 }

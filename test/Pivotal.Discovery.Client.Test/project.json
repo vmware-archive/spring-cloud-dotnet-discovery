@@ -35,6 +35,7 @@
     "Microsoft.AspNetCore.TestHost": "1.0.0",
     "Pivotal.Discovery.Client": "1.0.0-*",
     "SteelToe.Extensions.Configuration.CloudFoundry": "1.0.0-dev-*",
+    "SteelToe.CloudFoundry.Connector": "1.0.0-dev-*",
     "Microsoft.Extensions.DependencyInjection.Abstractions": "1.0.0",
     "xunit": "2.2.0-beta2-build3300",
     "dotnet-test-xunit": "2.2.0-preview2-build1029"

@@ -17,66 +17,60 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using SteelToe.CloudFoundry.Connector.Services;
 using System;
 using System.Collections.Generic;
-
+using ST = SteelToe.Discovery.Client;
 
 namespace Pivotal.Discovery.Client
 {
-    internal class DiscoveryClientFactory
+    internal class DiscoveryClientFactory : ST.DiscoveryClientFactory
     {
-        private static object _lock = new object();
-        internal static object _discoveryClient;
+        protected IServiceInfo _info;
+        protected DiscoveryClientConfigurer _configurer = new DiscoveryClientConfigurer();
 
-        internal static object CreateDiscoveryClient(IServiceProvider provider)
+        internal DiscoveryClientFactory()
         {
-            if (_discoveryClient == null)
-            {
-                if (provider == null)
-                {
-                    return null;
-                }
-
-                lock (_lock)
-                {
-                    if (_discoveryClient == null)
-                    {
-                        var options = provider.GetService(typeof(IOptions<DiscoveryOptions>)) as IOptions<DiscoveryOptions>;
-                        var logFactory = provider.GetService(typeof(ILoggerFactory)) as ILoggerFactory;
-                        var lifeCycle = provider.GetService(typeof(IApplicationLifetime)) as IApplicationLifetime;
-                        _discoveryClient = CreateClient(options?.Value, lifeCycle, logFactory);
-                    }
-                }
-            }
-
-            return _discoveryClient;
+        }
+        public DiscoveryClientFactory(IServiceInfo sinfo, DiscoveryOptions config) :
+            base(config)
+        {
+            _info = sinfo;
         }
 
-        internal static object CreateClient(DiscoveryOptions options, IApplicationLifetime lifeCycle = null, ILoggerFactory logFactory = null)
+        internal protected override void ConfigureOptions()
+        {
+            _configurer.Configure(_info, _config as DiscoveryOptions);
+        }
+
+
+        internal protected override object CreateClient(IApplicationLifetime lifeCycle = null, ILoggerFactory logFactory = null)
         {
             var logger = logFactory?.CreateLogger<DiscoveryClientFactory>();
-            if (options == null)
+            var config = _config as DiscoveryOptions;
+
+            if (config == null)
             {
                 logger?.LogWarning("Failed to create DiscoveryClient, no DiscoveryOptions");
                 return _unknown;
             }
 
-            if (options.ClientType == DiscoveryClientType.EUREKA)
+            if (config.ClientType == DiscoveryClientType.EUREKA)
             {
-                var clientOpts = options.ClientOptions as EurekaClientOptions;
+                var clientOpts = config.ClientOptions as EurekaClientOptions;
                 if (clientOpts == null)
                 {
                     logger?.LogWarning("Failed to create DiscoveryClient, no EurekaClientOptions");
                     return _unknown;
                 }
 
-                var instOpts = options.RegistrationOptions as EurekaInstanceOptions;
+                var instOpts = config.RegistrationOptions as EurekaInstanceOptions;
                 var httpClient = new EurekaHttpClient(clientOpts, logFactory);
                 return new EurekaDiscoveryClient(clientOpts, instOpts, httpClient, lifeCycle, logFactory);
             }
             else
             {
-                logger?.LogWarning("Failed to create DiscoveryClient, unknown ClientType: {0}", options.ClientType.ToString());
+                logger?.LogWarning("Failed to create DiscoveryClient, unknown ClientType: {0}", config.ClientType.ToString());
             }
 
 

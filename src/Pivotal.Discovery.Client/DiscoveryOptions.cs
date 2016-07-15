@@ -14,12 +14,24 @@
 // limitations under the License.
 //
 
+using Microsoft.Extensions.Configuration;
+using System;
+using System.Linq;
 using ST = SteelToe.Discovery.Client;
 
 namespace Pivotal.Discovery.Client
 {
     public class DiscoveryOptions : ST.DiscoveryOptions
     {
+        public DiscoveryOptions(IConfiguration config) : base()
+        {
+            if (config == null)
+            {
+                throw new ArgumentNullException(nameof(config));
+            }
+
+            Configure(config);
+        }
         public DiscoveryOptions() :base()
         {
         }
@@ -57,6 +69,19 @@ namespace Pivotal.Discovery.Client
             set
             {
                 _registrationOptions = value;
+            }
+        }
+        internal protected override void Configure(IConfiguration config)
+        {
+            var clientConfigsection = config.GetSection(EUREKA_PREFIX);
+            int childCount = clientConfigsection.GetChildren().Count();
+            if (childCount > 0)
+            {
+                Configure(config, new EurekaClientOptions(), new EurekaInstanceOptions());
+            }
+            else
+            {
+                ClientType = DiscoveryClientType.UNKNOWN;
             }
         }
     }
