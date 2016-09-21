@@ -24,8 +24,8 @@ using System.Net.Security;
 using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json.Linq;
-using STT = SteelToe.Discovery.Eureka.Transport;
-using SteelToe.Discovery.Eureka;
+using STT = Steeltoe.Discovery.Eureka.Transport;
+using Steeltoe.Discovery.Eureka;
 
 namespace Pivotal.Discovery.Client
 {

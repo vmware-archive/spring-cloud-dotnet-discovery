@@ -14,7 +14,7 @@
 // limitations under the License.
 //
 
-using SteelToe.Discovery.Eureka.AppInfo;
+using Steeltoe.Discovery.Eureka.AppInfo;
 using Xunit;
 
 namespace Pivotal.Discovery.Client.Test

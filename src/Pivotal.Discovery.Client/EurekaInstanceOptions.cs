@@ -13,7 +13,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 //
-using ST = SteelToe.Discovery.Client;
+using ST = Steeltoe.Discovery.Client;
 
 namespace Pivotal.Discovery.Client
 {

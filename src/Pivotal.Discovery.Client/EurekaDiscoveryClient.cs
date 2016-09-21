@@ -16,10 +16,10 @@
 
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Logging;
-using SteelToe.Discovery.Eureka.AppInfo;
-using SteelToe.Discovery.Eureka.Transport;
+using Steeltoe.Discovery.Eureka.AppInfo;
+using Steeltoe.Discovery.Eureka.Transport;
 using System.Collections.Generic;
-using ST = SteelToe.Discovery.Client;
+using ST = Steeltoe.Discovery.Client;
 
 namespace Pivotal.Discovery.Client
 {

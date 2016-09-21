@@ -17,10 +17,10 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-using SteelToe.CloudFoundry.Connector.Services;
+using Steeltoe.CloudFoundry.Connector.Services;
 using System;
 using System.Collections.Generic;
-using ST = SteelToe.Discovery.Client;
+using ST = Steeltoe.Discovery.Client;
 
 namespace Pivotal.Discovery.Client
 {

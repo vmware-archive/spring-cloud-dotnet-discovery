@@ -14,7 +14,7 @@
 // limitations under the License.
 //
 
-using SteelToe.Discovery.Eureka;
+using Steeltoe.Discovery.Eureka;
 using System;
 
 namespace Pivotal.Discovery.Client.Test
