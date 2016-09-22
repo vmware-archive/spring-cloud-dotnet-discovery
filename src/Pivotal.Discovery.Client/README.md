@@ -73,7 +73,7 @@ Below is an example of the clients settings in JSON that are necessary to get th
 }
 ```
 
-For a complete list of client settings see the documentation in the [IEurekaClientConfig](https://github.com/SteelToeOSS/Discovery/blob/master/src/SteelToe.Discovery.Eureka.Client/IEurekaClientConfig.cs) and [IEurekaInstanceConfig](https://github.com/SteelToeOSS/Discovery/blob/master/src/SteelToe.Discovery.Eureka.Client/IEurekaInstanceConfig.cs) files.
+For a complete list of client settings see the documentation in the [IEurekaClientConfig](https://github.com/SteeltoeOSS/Discovery/blob/master/src/Steeltoe.Discovery.Eureka.Client/IEurekaClientConfig.cs) and [IEurekaInstanceConfig](https://github.com/SteeltoeOSS/Discovery/blob/master/src/Steeltoe.Discovery.Eureka.Client/IEurekaInstanceConfig.cs) files.
 
 ## Add the CloudFoundry Configuration Provider
 Next we add the CloudFoundry Configuration provider to the builder (e.g. `AddCloudFoundry()`). This is needed in order to pickup the VCAP_ Service bindings and add them to the Configuration. Here is some sample code illustrating how this is done:

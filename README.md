@@ -75,4 +75,4 @@ To run the unit tests:
 6. dotnet test --framework netcoreapp1.0
 
 # Sample Applications
-See the [Samples](https://github.com/SteelToeOSS/Samples) repo for examples of how to use these packages.
+See the [Samples](https://github.com/SteeltoeOSS/Samples) repo for examples of how to use these packages.
