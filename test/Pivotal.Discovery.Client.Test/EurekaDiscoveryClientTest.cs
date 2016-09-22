@@ -16,7 +16,7 @@
 
 using System;
 using Xunit;
-using SteelToe.Discovery.Eureka;
+using Steeltoe.Discovery.Eureka;
 
 namespace Pivotal.Discovery.Client.Test
 {

@@ -14,12 +14,12 @@
 // limitations under the License.
 //
 using Microsoft.Extensions.Configuration;
-using SteelToe.Extensions.Configuration;
-using SteelToe.CloudFoundry.Connector;
+using Steeltoe.Extensions.Configuration;
+using Steeltoe.CloudFoundry.Connector;
 using System;
 using System.IO;
 using Xunit;
-using SteelToe.CloudFoundry.Connector.Services;
+using Steeltoe.CloudFoundry.Connector.Services;
 
 namespace Pivotal.Discovery.Client.Test
 {

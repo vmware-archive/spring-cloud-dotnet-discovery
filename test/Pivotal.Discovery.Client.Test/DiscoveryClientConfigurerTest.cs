@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.Configuration;
-using SteelToe.CloudFoundry.Connector;
-using SteelToe.CloudFoundry.Connector.Services;
-using SteelToe.Extensions.Configuration;
+using Steeltoe.CloudFoundry.Connector;
+using Steeltoe.CloudFoundry.Connector.Services;
+using Steeltoe.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.IO;

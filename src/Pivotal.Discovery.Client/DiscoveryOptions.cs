@@ -17,7 +17,7 @@
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Linq;
-using ST = SteelToe.Discovery.Client;
+using ST = Steeltoe.Discovery.Client;
 
 namespace Pivotal.Discovery.Client
 {
