@@ -41,6 +41,8 @@ jsonfile.readFile(file, function (err, project) {
 
     // Patch dependencies
     project.dependencies['Steeltoe.Discovery.Client'] = dependsVersion;
+    // Patch dependencies
+    project.dependencies['Steeltoe.CloudFoundry.Connector'] = dependsVersion;
 
     jsonfile.writeFile(file, project, {spaces: 2}, function(err) {
         if (err)
