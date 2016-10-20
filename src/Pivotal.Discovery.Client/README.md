@@ -2,7 +2,7 @@
 
 This project contains the Pivotal Discovery Client.  This client provides a generalized interface to service registries.  
 
-Currently the client only supports [Spring Cloud Services Eureka Server](http://docs.pivotal.io/spring-cloud-services/service-registry/), but in the not to distant future we will add support Consul as well.
+Currently the client only supports [Spring Cloud Services Eureka Server](http://docs.pivotal.io/spring-cloud-services/service-registry/), but in the future we will add support Consul as well.
 
 ## Provider Package Name and Feeds
 
