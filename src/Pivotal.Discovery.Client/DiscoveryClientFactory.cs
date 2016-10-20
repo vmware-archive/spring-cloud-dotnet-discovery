@@ -44,7 +44,7 @@ namespace Pivotal.Discovery.Client
         }
 
 
-        internal protected override object CreateClient(IApplicationLifetime lifeCycle = null, ILoggerFactory logFactory = null)
+        public override object CreateClient(IApplicationLifetime lifeCycle = null, ILoggerFactory logFactory = null)
         {
             var logger = logFactory?.CreateLogger<DiscoveryClientFactory>();
             var config = _config as DiscoveryOptions;
