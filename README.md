@@ -3,7 +3,7 @@ A Service Registry provides a database which applications can use in implementin
 
 There are several popular options for Service Registries. Netflix built and then open-sourced their own service registry, Eureka. Another relatively new, but increasingly popular option is Consul. 
 
-This repo contains various packages for interacting with Service Registries.  The [Pivotal.Discovery.Client](https://github.com/pivotal-cf/spring-cloud-dotnet-discovery/tree/master/src/Pivotal.Discovery.Client) provides a configurable generalized interface to Service Discovery and Registration.  Currently you can use the client to work with the [Spring Cloud Services Eureka Server](http://docs.pivotal.io/spring-cloud-services/service-registry/) as a Service Registry. In the near future support will be added for Consul.
+This repo contains various packages for interacting with Service Registries.  The [Pivotal.Discovery.Client](https://github.com/pivotal-cf/spring-cloud-dotnet-discovery/tree/master/src/Pivotal.Discovery.Client) provides a configurable generalized interface to Service Discovery and Registration.  Currently you can use the client to work with the [Spring Cloud Services Eureka Server](http://docs.pivotal.io/spring-cloud-services/service-registry/) as a Service Registry. In the near future support will be added for others.
 
 Windows Master:  [![AppVeyor Master](https://ci.appveyor.com/api/projects/status/84oangqh3o4fyt7b/branch/master?svg=true)](https://ci.appveyor.com/project/steeltoe/spring-cloud-dotnet-discovery/branch/master)
 
@@ -18,7 +18,7 @@ The packages are intended to support both .NET 4.5.1+ and .NET Core (CoreCLR/Cor
 
 While the primary usage of the providers is intended to be with ASP.NET Core applications, they should also work fine with UWP, Console and ASP.NET 4.x apps.
  
-Currently all of the code and samples have been tested on .NET Core 1.0.0-RC2/SDK Preview 1, .NET 4.5.1, and on ASP.NET Core 1.0.0-RC2-final.
+Currently all of the code and samples have been tested on .NET Core 1.1, .NET 4.5.1/4.6.x, and on ASP.NET Core 1.1.0.
 
 # Usage
 See the Readme for each enclosed project for more details on how to make use of it in an application.
@@ -32,47 +32,54 @@ All new development is done on the dev branch. More stable versions of the packa
 
 [Release or Release Candidate feed](https://www.nuget.org/) - https://www.nuget.org/. 
 
+# Building Pre-requisites
+To build and run the unit tests:
+
+1. .NET Core SDK 1.0.1 or greater
+2. .NET Core Runtime 1.1
+
+
 # Building Packages & Running Tests - Windows
 To build the packages on windows:
 
 1. git clone ...
-2. cd <clone directory>
+2. cd clone directory
 3. Install .NET Core SDK
 4. dotnet restore src
-5. cd src\<project> (e.g. cd src\Pivotal.Discovery.Client)
-6. dotnet pack --configuration <Release or Debug>  
+5. cd src\project (e.g. cd src\Pivotal.Discovery.Client)
+6. dotnet pack --configuration Release or Debug
 
 The resulting artifacts can be found in the bin folder under the corresponding project. (e.g. src/Pivotal.Discovery.Client/bin
 
 To run the unit tests:
 
 1. git clone ...
-2. cd <clone directory>
+2. cd clone directory
 3. Install .NET Core SDK 
 4. dotnet restore test
-5. cd test\<test project> (e.g. cd test\Pivotal.Discovery.Client.Test)
+5. cd test\test project (e.g. cd test\Pivotal.Discovery.Client.Test)
 6. dotnet test
 
 # Building Packages & Running Tests - Linux/OSX
 To build the packages on Linux/OSX:
 
 1. git clone ...
-2. cd <clone directory>
+2. cd clone directory
 3. Install .NET Core SDK
 4. dotnet restore src
-5. cd src/<project> (e.g.. cd src/Pivotal.Discovery.Client)
-6. dotnet pack --configuration <Release or Debug> 
+5. cd src/project (e.g.. cd src/Pivotal.Discovery.Client)
+6. dotnet pack --configuration Release or Debug
 
 The resulting artifacts can be found in the bin folder under the corresponding project. (e.g. src/Pivotal.Discovery.Client/bin
 
 To run the unit tests:
 
 1. git clone ...
-2. cd <clone directory>
+2. cd clone directory
 3. Install .NET Core SDK 
 4. dotnet restore test
-5. cd test\<test project> (e.g. cd test/Pivotal.Discovery.Client.Test)
-6. dotnet test --framework netcoreapp1.0
+5. cd test/test project (e.g. cd test/Pivotal.Discovery.Client.Test)
+6. dotnet test --framework netcoreapp1.1
 
 # Sample Applications
 See the [Samples](https://github.com/SteeltoeOSS/Samples) repo for examples of how to use these packages.

@@ -10,6 +10,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{AFFEF0A3-C822-4177-A3B9-3E3E6626CA87}"
 	ProjectSection(SolutionItems) = preProject
 		global.json = global.json
+		README.md = README.md
 	EndProjectSection
 EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Pivotal.Discovery.Client", "src\Pivotal.Discovery.Client\Pivotal.Discovery.Client.xproj", "{52C8B8AD-BE98-4C58-B9AD-01AE8824BF48}"
