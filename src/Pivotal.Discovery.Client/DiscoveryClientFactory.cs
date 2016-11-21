@@ -24,7 +24,7 @@ using ST = Steeltoe.Discovery.Client;
 
 namespace Pivotal.Discovery.Client
 {
-    internal class DiscoveryClientFactory : ST.DiscoveryClientFactory
+    public class DiscoveryClientFactory : ST.DiscoveryClientFactory
     {
         protected IServiceInfo _info;
         protected DiscoveryClientConfigurer _configurer = new DiscoveryClientConfigurer();
