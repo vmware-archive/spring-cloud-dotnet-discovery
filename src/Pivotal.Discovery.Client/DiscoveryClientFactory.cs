@@ -43,10 +43,12 @@ namespace Pivotal.Discovery.Client
             _configurer.Configure(_info, _config as DiscoveryOptions);
         }
 
-
         public override object CreateClient(IApplicationLifetime lifeCycle = null, ILoggerFactory logFactory = null)
         {
             var logger = logFactory?.CreateLogger<DiscoveryClientFactory>();
+
+            ConfigureOptions();
+
             var config = _config as DiscoveryOptions;
 
             if (config == null)
