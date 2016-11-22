@@ -11,10 +11,10 @@ namespace Pivotal.Discovery.Client
         private const string EUREKA_URI_SUFFIX = "/eureka/";
         private const int DEFAULT_NONSECUREPORT = 80;
 
-        internal DiscoveryOptions Configure(IServiceInfo si, DiscoveryOptions configuration)
+        internal DiscoveryOptions Configure(IServiceInfo si, DiscoveryOptions config)
         {
-            UpdateConfiguration(si, configuration);
-            return configuration;
+            UpdateConfiguration(si, config);
+            return config;
         }
 
         internal void UpdateConfiguration(IServiceInfo si, DiscoveryOptions config)
@@ -28,6 +28,10 @@ namespace Pivotal.Discovery.Client
 
         internal void UpdateConfiguration(EurekaServiceInfo si, DiscoveryOptions config)
         {
+            if (config == null)
+            {
+                return;
+            }
             config.ClientType = DiscoveryClientType.EUREKA;
 
             var clientOptions = config.ClientOptions as EurekaClientOptions;
