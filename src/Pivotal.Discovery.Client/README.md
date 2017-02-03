@@ -30,8 +30,9 @@ You can create a Service Registry instance using either the CloudFoundry command
 ```
 1. cf target -o myorg -s development
 2. cf create-service p-service-registry standard myDiscoveryService 
-3. cf bind-service myApp myDiscoveryService
-4. cf restage myApp
+3. cf services  // make sure service avail
+4. cf bind-service myApp myDiscoveryService
+5. cf restage myApp
 
 ```
 Once you have bound the service to the app, the providers settings have been setup in `VCAP_SERVICES` and will be picked up automatically when the app is started by using the `CloudFoundry` configuration provider at startup.
