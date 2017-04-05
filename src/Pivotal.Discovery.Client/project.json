@@ -1,5 +1,5 @@
 {
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Spring Cloud Services Discovery Client",
   "authors": [
     "Pivotal",
@@ -41,7 +41,7 @@
     "Microsoft.Extensions.Options.ConfigurationExtensions": "1.1.0",
     "Microsoft.Extensions.Configuration.Binder": "1.1.0",
     "Newtonsoft.Json": "9.0.1",
-    "Steeltoe.CloudFoundry.Connector": "1.0.0-*",
-    "Steeltoe.Discovery.Client": "1.0.0-*"
+    "Steeltoe.CloudFoundry.Connector": "1.0.1-*",
+    "Steeltoe.Discovery.Client": "1.0.1-*"
   }
   }

@@ -34,7 +34,7 @@ namespace Pivotal.Discovery.Client.Test
         [Fact]
         public void AddDiscoveryClient_ThrowsIfServiceCollectionNull()
         {
-            Console.WriteLine("AddDiscoveryClient_ThrowsIfServiceCollectionNull");
+         
             // Arrange
             IServiceCollection services = null;
             IConfigurationRoot config = null;
@@ -53,7 +53,7 @@ namespace Pivotal.Discovery.Client.Test
         [Fact]
         public void AddDiscoveryClient_ThrowsIfConfigurtionNull()
         {
-            Console.WriteLine("AddDiscoveryClient_ThrowsIfConfigurtionNull");
+           
             // Arrange
             IServiceCollection services = new ServiceCollection();
             IConfigurationRoot config = null;
