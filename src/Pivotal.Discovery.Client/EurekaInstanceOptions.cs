@@ -19,5 +19,11 @@ namespace Pivotal.Discovery.Client
 {
     public class EurekaInstanceOptions : ST.EurekaInstanceOptions, IDiscoveryRegistrationOptions
     {
+        public const string Default_CloudFoundry_RegistrationMethod = "route";
+
+        public EurekaInstanceOptions() :base()
+        {
+            RegistrationMethod = Default_CloudFoundry_RegistrationMethod;
+        }
     }
 }

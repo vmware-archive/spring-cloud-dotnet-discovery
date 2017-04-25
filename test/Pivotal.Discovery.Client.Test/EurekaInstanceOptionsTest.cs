@@ -50,6 +50,7 @@ namespace Pivotal.Discovery.Client.Test
             Assert.Equal(DataCenterName.MyOwn, opts.DataCenterInfo.Name);
             Assert.Equal(opts.GetHostAddress(false), opts.IpAddress);
             Assert.Null(opts.DefaultAddressResolutionOrder);
+            Assert.Equal(EurekaInstanceOptions.Default_CloudFoundry_RegistrationMethod, opts.RegistrationMethod);
 
         }
 

@@ -45,6 +45,7 @@ namespace Pivotal.Discovery.Client.Test
         'appName': 'appName',
         'appGroup': 'appGroup',
         'instanceEnabledOnInit': true,
+        'hostname': 'hostname',
         'port': 100,
         'securePort': 100,
         'nonSecurePortEnabled': true,
@@ -109,6 +110,7 @@ namespace Pivotal.Discovery.Client.Test
             Assert.Equal("appGroup", ro.AppGroupName);
             Assert.True(ro.IsInstanceEnabledOnInit);
             Assert.Equal(100, ro.NonSecurePort);
+            Assert.Equal("hostname", ro.HostName);
             Assert.Equal(100, ro.SecurePort);
             Assert.True(ro.IsNonSecurePortEnabled);
             Assert.True(ro.SecurePortEnabled);
@@ -206,6 +208,13 @@ namespace Pivotal.Discovery.Client.Test
 
             var appsettings = @"
 {
+'spring': {
+    'cloud': {
+        'discovery': {
+            'registrationMethod': 'hostname'
+        }
+    }
+},
 'eureka': {
     'client': {
         'eurekaServer': {
@@ -232,6 +241,7 @@ namespace Pivotal.Discovery.Client.Test
         'appName': 'appName',
         'appGroup': 'appGroup',
         'instanceEnabledOnInit': true,
+        'hostname': 'hostname',
         'port': 100,
         'securePort': 100,
         'nonSecurePortEnabled': true,
@@ -302,11 +312,12 @@ namespace Pivotal.Discovery.Client.Test
             Assert.NotNull(ro);
 
 
-            Assert.Equal("foo.apps.testcloud.com:instance_id", ro.InstanceId);
+            Assert.Equal("hostname:instance_id", ro.InstanceId);
             Assert.Equal("foo", ro.AppName);
             Assert.Equal("appGroup", ro.AppGroupName);
             Assert.True(ro.IsInstanceEnabledOnInit);
             Assert.Equal(80, ro.NonSecurePort);
+            Assert.Equal("hostname", ro.HostName);
             Assert.Equal(100, ro.SecurePort);
             Assert.True(ro.IsNonSecurePortEnabled);
             Assert.True(ro.SecurePortEnabled);
