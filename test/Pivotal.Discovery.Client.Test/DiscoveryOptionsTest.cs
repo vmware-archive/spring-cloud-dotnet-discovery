@@ -48,6 +48,13 @@ namespace Pivotal.Discovery.Client.Test
             // Arrange
             var appsettings = @"
 {
+'spring': {
+    'cloud': {
+        'discovery': {
+            'registrationMethod': 'hostname'
+        }
+    }
+},
 'eureka': {
     'client': {
         'eurekaServer': {
@@ -98,11 +105,14 @@ namespace Pivotal.Discovery.Client.Test
     }
     }
 }";
-            var basePath = Path.GetTempPath();
             var path = TestHelpers.CreateTempFile(appsettings);
-            var configurationBuilder = new ConfigurationBuilder();
-            configurationBuilder.SetBasePath(basePath);
-            configurationBuilder.AddJsonFile(Path.GetFileName(path));
+            string directory = Path.GetDirectoryName(path);
+            string fileName = Path.GetFileName(path);
+            ConfigurationBuilder configurationBuilder = new ConfigurationBuilder();
+            configurationBuilder.SetBasePath(directory);
+
+
+            configurationBuilder.AddJsonFile(fileName);
             var config = configurationBuilder.Build();
 
             var options = new DiscoveryOptions(config);
@@ -130,7 +140,7 @@ namespace Pivotal.Discovery.Client.Test
             var ro = options.RegistrationOptions as EurekaInstanceOptions;
             Assert.NotNull(ro);
 
-
+            Assert.Equal("hostname", ro.RegistrationMethod);
             Assert.Equal("instanceId", ro.InstanceId);
             Assert.Equal("appName", ro.AppName);
             Assert.Equal("appGroup", ro.AppGroupName);

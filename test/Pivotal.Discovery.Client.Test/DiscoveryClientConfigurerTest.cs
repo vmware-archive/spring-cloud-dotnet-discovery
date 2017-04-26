@@ -241,7 +241,7 @@ namespace Pivotal.Discovery.Client.Test
         'appName': 'appName',
         'appGroup': 'appGroup',
         'instanceEnabledOnInit': true,
-        'hostname': 'hostname',
+        'hostname': 'myhostname',
         'port': 100,
         'securePort': 100,
         'nonSecurePortEnabled': true,
@@ -267,13 +267,18 @@ namespace Pivotal.Discovery.Client.Test
 }";
             Environment.SetEnvironmentVariable("VCAP_APPLICATION", vcap_application);
             Environment.SetEnvironmentVariable("VCAP_SERVICES", vcap_services);
-            var basePath = Path.GetTempPath();
+
             var path = TestHelpers.CreateTempFile(appsettings);
-            var configurationBuilder = new ConfigurationBuilder();
-            configurationBuilder.SetBasePath(basePath);
-            configurationBuilder.AddJsonFile(Path.GetFileName(path));
+            string directory = Path.GetDirectoryName(path);
+            string fileName = Path.GetFileName(path);
+            ConfigurationBuilder configurationBuilder = new ConfigurationBuilder();
+            configurationBuilder.SetBasePath(directory);
+
+
+            configurationBuilder.AddJsonFile(fileName);
             configurationBuilder.AddCloudFoundry();
             var config = configurationBuilder.Build();
+
 
             var sis = config.GetServiceInfos<EurekaServiceInfo>();
             Assert.Equal(1, sis.Count);
@@ -311,13 +316,13 @@ namespace Pivotal.Discovery.Client.Test
             var ro = options.RegistrationOptions as EurekaInstanceOptions;
             Assert.NotNull(ro);
 
-
-            Assert.Equal("hostname:instance_id", ro.InstanceId);
+            Assert.Equal("hostname", ro.RegistrationMethod);
+            Assert.Equal("myhostname:instance_id", ro.InstanceId);
             Assert.Equal("foo", ro.AppName);
             Assert.Equal("appGroup", ro.AppGroupName);
             Assert.True(ro.IsInstanceEnabledOnInit);
             Assert.Equal(80, ro.NonSecurePort);
-            Assert.Equal("hostname", ro.HostName);
+            Assert.Equal("myhostname", ro.HostName);
             Assert.Equal(100, ro.SecurePort);
             Assert.True(ro.IsNonSecurePortEnabled);
             Assert.True(ro.SecurePortEnabled);
