@@ -67,7 +67,7 @@ namespace Pivotal.Discovery.Client
    
             var request = new HttpRequestMessage(HttpMethod.Post, config.AccessTokenUri);
             HttpClient client = GetHttpClient(config);
-#if NET451
+#if NET452
             RemoteCertificateValidationCallback prevValidator = null;
             if (!config.ValidateCertificates)
             {
@@ -107,7 +107,7 @@ namespace Pivotal.Discovery.Client
             {
                 _logger?.LogError("Eureka Server exception: {0} ,obtaining access token from: {1}", e, config.AccessTokenUri);
             }
-#if NET451
+#if NET452
             finally
             {
                 ServicePointManager.ServerCertificateValidationCallback = prevValidator;
