@@ -56,8 +56,11 @@ namespace Pivotal.Discovery.Client
             {
                 return;
             }
-            
-            instOptions.HostName = si.ApplicationInfo.ApplicationUris[0]; 
+
+            if (instOptions.RegistrationMethod == null || 
+                "route".Equals(instOptions.RegistrationMethod, StringComparison.OrdinalIgnoreCase))
+                instOptions.HostName = si.ApplicationInfo.ApplicationUris[0]; 
+
             string instance_id = si.ApplicationInfo.InstanceId; 
             if (string.IsNullOrEmpty(instance_id))
             {

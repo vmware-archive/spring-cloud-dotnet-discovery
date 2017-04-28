@@ -19,5 +19,6 @@ namespace Pivotal.Discovery.Client
 {
     public class EurekaInstanceOptions : ST.EurekaInstanceOptions, IDiscoveryRegistrationOptions
     {
+   
     }
 }
