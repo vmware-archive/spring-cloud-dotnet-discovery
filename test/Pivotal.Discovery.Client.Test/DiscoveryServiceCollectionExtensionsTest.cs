@@ -258,7 +258,7 @@ namespace Pivotal.Discovery.Client.Test
 
         }
         [Fact]
-        public void AddDiscoveryClient_MultipleRedisServices_ThrowsConnectorException()
+        public void AddDiscoveryClient_MultipleRegistryServices_ThrowsConnectorException()
         {
             // Arrange
             var env1 = @"
