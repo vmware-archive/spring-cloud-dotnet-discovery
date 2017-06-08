@@ -1,4 +1,3 @@
-# SCS Service Discovery .NET Client
 
 This project contains the Pivotal Discovery Client.  This client provides a generalized interface to service registries.  
 
