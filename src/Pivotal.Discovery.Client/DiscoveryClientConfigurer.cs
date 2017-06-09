@@ -88,7 +88,6 @@ namespace Pivotal.Discovery.Client
         {
             UpdateWithDefaults(si, instOptions, clientOptions);
             instOptions.HostName = hostName;
-            instOptions.SecurePortEnabled = true;
             instOptions.InstanceId = hostName + ":" + si.ApplicationInfo.InstanceId;
         }
 
@@ -103,7 +102,7 @@ namespace Pivotal.Discovery.Client
         internal void UpdateWithDefaultsForRoute(EurekaServiceInfo si, EurekaInstanceOptions instOptions, EurekaClientOptions clientOptions)
         {
             UpdateWithDefaults(si, instOptions, clientOptions);
-            instOptions.SecurePortEnabled = true;
+            // TODO: Java connector does this: instOptions.SecurePortEnabled = true;
             instOptions.InstanceId = si.ApplicationInfo.ApplicationUris[0] + ":" + si.ApplicationInfo.InstanceId;
 
         }
