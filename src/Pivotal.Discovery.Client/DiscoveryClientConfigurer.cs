@@ -103,7 +103,6 @@ namespace Pivotal.Discovery.Client
         internal void UpdateWithDefaultsForRoute(EurekaServiceInfo si, EurekaInstanceOptions instOptions, EurekaClientOptions clientOptions)
         {
             UpdateWithDefaults(si, instOptions, clientOptions);
-            instOptions.SecurePortEnabled = true;
             instOptions.InstanceId = si.ApplicationInfo.ApplicationUris[0] + ":" + si.ApplicationInfo.InstanceId;
 
         }
