@@ -25,6 +25,8 @@ namespace Pivotal.Discovery.Client.Test
         {
             Environment.SetEnvironmentVariable("VCAP_APPLICATION", null);
             Environment.SetEnvironmentVariable("VCAP_SERVICES", null);
+            Environment.SetEnvironmentVariable("CF_INSTANCE_INDEX", null);
+            Environment.SetEnvironmentVariable("CF_INSTANCE_GUID", null);
             ApplicationInfoManager.Instance.InstanceInfo = null;
             ApplicationInfoManager.Instance.InstanceConfig = null;
             DiscoveryManager.Instance.ClientConfig = null;

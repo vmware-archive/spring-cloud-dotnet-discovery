@@ -267,7 +267,8 @@ namespace Pivotal.Discovery.Client.Test
 }";
             Environment.SetEnvironmentVariable("VCAP_APPLICATION", vcap_application);
             Environment.SetEnvironmentVariable("VCAP_SERVICES", vcap_services);
-
+            Environment.SetEnvironmentVariable("CF_INSTANCE_INDEX", "1");
+            Environment.SetEnvironmentVariable("CF_INSTANCE_GUID", "ac923014-93a5-4aee-b934-a043b241868b");
             var path = TestHelpers.CreateTempFile(appsettings);
             string directory = Path.GetDirectoryName(path);
             string fileName = Path.GetFileName(path);
@@ -321,7 +322,7 @@ namespace Pivotal.Discovery.Client.Test
             Assert.Equal("foo", ro.AppName);
             Assert.Equal("appGroup", ro.AppGroupName);
             Assert.True(ro.IsInstanceEnabledOnInit);
-            Assert.Equal(80, ro.NonSecurePort);
+            Assert.Equal(100, ro.NonSecurePort);
             Assert.Equal("myhostname", ro.HostName);
             Assert.Equal(100, ro.SecurePort);
             Assert.True(ro.IsNonSecurePortEnabled);
@@ -342,10 +343,13 @@ namespace Pivotal.Discovery.Client.Test
 
             var map = ro.MetadataMap;
             Assert.NotNull(map);
-            Assert.Equal(3, map.Count);
+            Assert.Equal(6, map.Count);
             Assert.Equal("bar", map["foo"]);
             Assert.Equal("foo", map["bar"]);
-            Assert.Equal("instance_id", map["instanceId"]);
+            Assert.Equal("instance_id", map[DiscoveryClientConfigurer.INSTANCE_ID]);
+            Assert.Equal("ac923014-93a5-4aee-b934-a043b241868b", map[DiscoveryClientConfigurer.CF_APP_GUID]);
+            Assert.Equal("1", map[DiscoveryClientConfigurer.CF_INSTANCE_INDEX]);
+            Assert.Equal(DiscoveryClientConfigurer.UNKNOWN_ZONE, map[DiscoveryClientConfigurer.ZONE]);
         }
     }
 }

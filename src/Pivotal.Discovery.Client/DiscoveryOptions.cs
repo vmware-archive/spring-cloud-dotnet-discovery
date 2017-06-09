@@ -52,7 +52,7 @@ namespace Pivotal.Discovery.Client
         {
             get
             {
-                return (IDiscoveryClientOptions) _clientOptions;
+                return _clientOptions as IDiscoveryClientOptions;
             }
             set
             {
@@ -64,7 +64,7 @@ namespace Pivotal.Discovery.Client
         {
             get
             {
-                return (IDiscoveryRegistrationOptions) _registrationOptions;
+                return  _registrationOptions as IDiscoveryRegistrationOptions;
             }
             set
             {
