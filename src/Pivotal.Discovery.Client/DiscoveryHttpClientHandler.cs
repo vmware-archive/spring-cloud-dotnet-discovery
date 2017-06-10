@@ -14,6 +14,7 @@
 // limitations under the License.
 //
 
+using Microsoft.Extensions.Logging;
 using System;
 
 using ST = Steeltoe.Discovery.Client;
@@ -23,8 +24,9 @@ namespace Pivotal.Discovery.Client
     public class DiscoveryHttpClientHandler : ST.DiscoveryHttpClientHandlerBase
     {
         private IDiscoveryClient _client;
+        private ILogger<DiscoveryHttpClientHandler> _logger;
 
-        public DiscoveryHttpClientHandler(IDiscoveryClient client) : base()
+        public DiscoveryHttpClientHandler(IDiscoveryClient client, ILogger<DiscoveryHttpClientHandler> logger = null) : base()
         {
             if (client == null)
             {
@@ -32,10 +34,13 @@ namespace Pivotal.Discovery.Client
             }
 
             _client = client;
+            _logger = logger;
         }
 
         internal protected override Uri LookupService(Uri current)
         {
+            _logger?.LogDebug("LookupService({0})", current.ToString());
+
             if (!current.IsDefaultPort)
             {
                 return current;
@@ -45,9 +50,9 @@ namespace Pivotal.Discovery.Client
             if (instances.Count > 0)
             {
                 int indx = _random.Next(instances.Count);
-                return new Uri(instances[indx].Uri, current.PathAndQuery);
+                current = new Uri(instances[indx].Uri, current.PathAndQuery);
             }
-
+            _logger?.LogDebug("LookupService() returning {0} ", current.ToString());
             return current;
 
         }

@@ -25,9 +25,11 @@ namespace Pivotal.Discovery.Client
 {
     public class EurekaDiscoveryClient : ST.EurekaDiscoveryClientBase, IDiscoveryClient
     {
+        private ILogger<EurekaDiscoveryClient> _logger;
         internal EurekaDiscoveryClient(EurekaClientOptions clientOptions, EurekaInstanceOptions instOptions, IEurekaHttpClient httpClient, IApplicationLifetime lifeCycle = null, ILoggerFactory logFactory = null)
             : base(clientOptions, instOptions, httpClient, lifeCycle, logFactory)
         {
+            _logger = logFactory?.CreateLogger<EurekaDiscoveryClient>();
         }
         public override string Description
         {
@@ -43,6 +45,7 @@ namespace Pivotal.Discovery.Client
             List<IServiceInstance> instances = new List<IServiceInstance>();
             foreach (InstanceInfo info in infos)
             {
+                _logger.LogDebug("GetInstances returning: {0}", info.ToString());
                 instances.Add(new EurekaServiceInstance(info));
             }
             return instances;
