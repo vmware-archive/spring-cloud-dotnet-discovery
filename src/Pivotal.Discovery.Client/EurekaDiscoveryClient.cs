@@ -54,15 +54,18 @@ namespace Pivotal.Discovery.Client
         public IServiceInstance GetLocalServiceInstance()
         {
             return new ThisServiceInstance(InstConfig.GetHostName(false),
-                InstConfig.SecurePortEnabled, InstConfig.MetadataMap, InstConfig.NonSecurePort, InstConfig.AppName);
+                InstConfig.SecurePortEnabled, InstConfig.MetadataMap,
+                (InstConfig.NonSecurePort == -1) ? EurekaInstanceOptions.Default_NonSecurePort : InstConfig.NonSecurePort,
+                (InstConfig.SecurePort == -1) ? EurekaInstanceOptions.Default_SecurePort : InstConfig.SecurePort,
+                InstConfig.AppName);
         }
 
     }
 
     public class ThisServiceInstance : ST.ThisServiceInstance, IServiceInstance
     {
-        public ThisServiceInstance(string host, bool isSecure, IDictionary<string, string> metadata, int port, string serviceId)
-            : base(host, isSecure, metadata, port, serviceId)
+        public ThisServiceInstance(string host, bool isSecure, IDictionary<string, string> metadata, int port, int securePort, string serviceId)
+            : base(host, isSecure, metadata, port, securePort, serviceId)
         {
         }
     }
