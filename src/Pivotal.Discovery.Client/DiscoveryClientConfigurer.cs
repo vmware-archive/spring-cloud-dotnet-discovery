@@ -18,6 +18,8 @@ namespace Pivotal.Discovery.Client
         internal const string INSTANCE_ID = "instanceId";
         internal const string ZONE = "zone";
         internal const string UNKNOWN_ZONE = "unknown";
+        internal const int DEFAULT_NONSECUREPORT = 80;
+        internal const int DEFAULT_SECUREPORT = 443;
 
         internal DiscoveryOptions Configure(IServiceInfo si, DiscoveryOptions config)
         {
@@ -103,6 +105,8 @@ namespace Pivotal.Discovery.Client
         internal void UpdateWithDefaultsForRoute(EurekaServiceInfo si, EurekaInstanceOptions instOptions, EurekaClientOptions clientOptions)
         {
             UpdateWithDefaults(si, instOptions, clientOptions);
+            instOptions.NonSecurePort = DEFAULT_NONSECUREPORT;
+            instOptions.SecurePort = DEFAULT_SECUREPORT;
             instOptions.InstanceId = si.ApplicationInfo.ApplicationUris[0] + ":" + si.ApplicationInfo.InstanceId;
 
         }
