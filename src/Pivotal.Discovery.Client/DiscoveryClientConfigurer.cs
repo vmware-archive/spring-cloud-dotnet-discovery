@@ -96,7 +96,7 @@ namespace Pivotal.Discovery.Client
         internal void UpdateWithDefaultsForDirect(EurekaServiceInfo si, EurekaInstanceOptions instOptions, EurekaClientOptions clientOptions)
         {
             UpdateWithDefaults(si, instOptions, clientOptions);
-            instOptions.HostName = si.ApplicationInfo.InternalIP;
+            instOptions.PreferIpAddress = true;
             instOptions.NonSecurePort = si.ApplicationInfo.Port;
             instOptions.SecurePort = si.ApplicationInfo.Port;
             instOptions.InstanceId = si.ApplicationInfo.InternalIP + ":" + si.ApplicationInfo.InstanceId;
