@@ -59,7 +59,7 @@ namespace Pivotal.Discovery.Client.Test
             DiscoveryClientFactory factory = new DiscoveryClientFactory(null, options);
             var client = factory.CreateClient();
             Assert.NotNull(client);
-            Assert.IsType(typeof(EurekaDiscoveryClient), client);
+            Assert.IsType<EurekaDiscoveryClient>(client);
         }
 
         [Fact]
