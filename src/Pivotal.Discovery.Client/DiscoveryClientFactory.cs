@@ -21,6 +21,7 @@ using Steeltoe.CloudFoundry.Connector.Services;
 using System;
 using System.Collections.Generic;
 using ST = Steeltoe.Discovery.Client;
+using System.Threading.Tasks;
 
 namespace Pivotal.Discovery.Client
 {
@@ -108,9 +109,9 @@ namespace Pivotal.Discovery.Client
             return null;
         }
 
-        public void ShutdownAsync()
+        public Task ShutdownAsync()
         {
-
+            return Task.FromResult(0);
         }
     }
 }

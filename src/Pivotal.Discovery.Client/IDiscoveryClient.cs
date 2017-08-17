@@ -16,7 +16,7 @@
 
 using System;
 using System.Collections.Generic;
-
+using System.Threading.Tasks;
 
 
 namespace Pivotal.Discovery.Client
@@ -48,7 +48,7 @@ namespace Pivotal.Discovery.Client
         IList<IServiceInstance> GetInstances(String serviceId);
 
 
-        void ShutdownAsync();
+        Task ShutdownAsync();
 
     }
 }
