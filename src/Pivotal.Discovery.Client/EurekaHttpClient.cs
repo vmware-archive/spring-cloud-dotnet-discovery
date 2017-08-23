@@ -68,12 +68,10 @@ namespace Pivotal.Discovery.Client
             var request = new HttpRequestMessage(HttpMethod.Post, config.AccessTokenUri);
             HttpClient client = GetHttpClient(config);
 #if NET452
+            // If certificate validation is disabled, inject a callback to handle properly
             RemoteCertificateValidationCallback prevValidator = null;
-            if (!config.ValidateCertificates)
-            {
-                prevValidator = ServicePointManager.ServerCertificateValidationCallback;
-                ServicePointManager.ServerCertificateValidationCallback = (sender, cert, chain, sslPolicyErrors) => true;
-            }
+            SecurityProtocolType prevProtocols = (SecurityProtocolType) 0;
+            ConfigureCertificateValidatation(out prevProtocols, out prevValidator);
 #endif      
 
             AuthenticationHeaderValue auth = new AuthenticationHeaderValue("Basic", GetEncoded(config.ClientId, config.ClientSecret));
@@ -110,7 +108,7 @@ namespace Pivotal.Discovery.Client
 #if NET452
             finally
             {
-                ServicePointManager.ServerCertificateValidationCallback = prevValidator;
+                RestoreCertificateValidation(prevProtocols, prevValidator);
             }
 #endif
             return null;
