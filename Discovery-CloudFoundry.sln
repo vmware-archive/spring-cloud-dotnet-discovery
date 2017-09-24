@@ -1,6 +1,6 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26403.7
+VisualStudioVersion = 15.0.26730.16
 MinimumVisualStudioVersion = 15.0.26124.0
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{A2B556D2-E385-4CEB-942C-9EB929132D6A}"
 EndProject
@@ -9,6 +9,34 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{3793597B-BDDC-4481-8170-285F83BF4AF9}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Pivotal.Discovery.Client.Test", "test\Pivotal.Discovery.Client.Test\Pivotal.Discovery.Client.Test.csproj", "{6F705316-61E8-416A-8E26-F95865EEB1D7}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "config", "config", "{C84C50FF-733E-4F4F-8002-9E097568E9F1}"
+	ProjectSection(SolutionItems) = preProject
+		config\nuget-dev.config = config\nuget-dev.config
+		config\nuget-master.config = config\nuget-master.config
+		config\nuget-update.config = config\nuget-update.config
+		config\nuget.config = config\nuget.config
+		config\versions-dev.props = config\versions-dev.props
+		config\versions-master.props = config\versions-master.props
+		config\versions-update.props = config\versions-update.props
+		config\versions.props = config\versions.props
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "scripts", "scripts", "{23D9169A-721F-441E-8248-19ECB64081F6}"
+	ProjectSection(SolutionItems) = preProject
+		scripts\appveyor_build.cmd = scripts\appveyor_build.cmd
+		scripts\appveyor_install.cmd = scripts\appveyor_install.cmd
+		scripts\appveyor_tests.cmd = scripts\appveyor_tests.cmd
+		scripts\travis_build.sh = scripts\travis_build.sh
+		scripts\travis_install.sh = scripts\travis_install.sh
+		scripts\travis_test.sh = scripts\travis_test.sh
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{BEABA039-9FAD-437A-B293-522A24944457}"
+	ProjectSection(SolutionItems) = preProject
+		.travis.yml = .travis.yml
+		appveyor.yml = appveyor.yml
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,5 +79,8 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{8D20FE1C-98C5-441C-88E5-3766C81BD4AE} = {A2B556D2-E385-4CEB-942C-9EB929132D6A}
 		{6F705316-61E8-416A-8E26-F95865EEB1D7} = {3793597B-BDDC-4481-8170-285F83BF4AF9}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {4DC14622-8BC0-4223-9C74-9223EBABDDDF}
 	EndGlobalSection
 EndGlobal
