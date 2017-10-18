@@ -1,7 +1,7 @@
 :: @ECHO OFF
 
 :: Build packages
-cd src\Pivotal.Discovery.Client
+cd src\Pivotal.Discovery.ClientCore
 dotnet restore --configfile ..\..\nuget.config
 IF NOT "%APPVEYOR_REPO_TAG_NAME%"=="" (
     IF NOT "%STEELTOE_VERSION_SUFFIX%"=="" (

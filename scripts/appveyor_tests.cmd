@@ -1,7 +1,7 @@
 @ECHO OFF
 
 :: Run unit tests 
-cd test\Pivotal.Discovery.Client.Test
+cd test\Pivotal.Discovery.ClientCore.Test
 dotnet restore --configfile ..\..\nuget.config
 dotnet xunit -verbose
 if not "%errorlevel%"=="0" goto failure

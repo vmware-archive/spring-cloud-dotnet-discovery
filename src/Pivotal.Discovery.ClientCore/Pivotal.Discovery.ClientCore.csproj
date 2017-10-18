@@ -1,0 +1,26 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="..\..\versions.props" />
+
+  <PropertyGroup>
+    <Description>Spring Cloud Services Discovery Client</Description>
+    <VersionPrefix>$(SteeltoeVersion)</VersionPrefix>
+    <VersionSuffix>$(VersionSuffix)</VersionSuffix>
+    <Authors>Pivotal;dtillman</Authors>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <AssemblyName>Pivotal.Discovery.ClientCore</AssemblyName>
+    <PackageId>Pivotal.Discovery.ClientCore</PackageId>
+    <PackageTags>Eureka, ASPNET Core, Spring, Spring Cloud, Spring Cloud Services</PackageTags>
+    <PackageIconUrl>http://steeltoe.io/images/transparent.png</PackageIconUrl>
+    <PackageProjectUrl>http://steeltoe.io</PackageProjectUrl>
+    <PackageLicenseUrl>http://www.apache.org/licenses/LICENSE-2.0</PackageLicenseUrl>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Steeltoe.CloudFoundry.Connector" Version="$(SteeltoeConnectorVersion)" />
+    <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="$(AspNetCoreVersion)" />
+    <PackageReference Include="Microsoft.AspNetCore.Hosting.Abstractions" Version="$(AspNetCoreVersion)" />
+    <PackageReference Include="Steeltoe.Discovery.Eureka.Client" Version="$(SteeltoeEurekaVersion)" />
+  </ItemGroup>
+
+</Project>

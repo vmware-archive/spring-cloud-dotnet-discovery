@@ -14,8 +14,8 @@ test_script:
 build_script:
   - scripts\appveyor_build.cmd
 artifacts:
-- path: 'src\Pivotal.Discovery.Client\bin\Release\*.nupkg'
-- path: 'src\Pivotal.Discovery.Client\bin\Debug\*.nupkg'
+- path: 'src\Pivotal.Discovery.ClientCore\bin\Release\*.nupkg'
+- path: 'src\Pivotal.Discovery.ClientCore\bin\Debug\*.nupkg'
 deploy:
 - provider: NuGet
   skip_symbols: false
