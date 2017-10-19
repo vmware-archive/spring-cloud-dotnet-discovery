@@ -19,17 +19,17 @@ using Microsoft.Extensions.Options;
 using Steeltoe.Discovery.Eureka;
 using Steeltoe.Discovery.Eureka.Transport;
 
-namespace Pivotal.Discovery.Client
+namespace Pivotal.Discovery.Eureka
 {
-    public class EurekaDiscoveryClient : Steeltoe.Discovery.Eureka.EurekaDiscoveryClient
+    public class PivotalEurekaDiscoveryClient : Steeltoe.Discovery.Eureka.EurekaDiscoveryClient
     {
-        public EurekaDiscoveryClient(
+        public PivotalEurekaDiscoveryClient(
             IOptionsMonitor<EurekaClientOptions> clientConfig, 
             IOptionsMonitor<EurekaInstanceOptions> instConfig, 
             EurekaApplicationInfoManager appInfoManager, 
             IEurekaHttpClient httpClient = null, 
             ILoggerFactory logFactory = null) 
-                : base(clientConfig, instConfig, appInfoManager, new EurekaHttpClient(clientConfig, logFactory), logFactory)
+                : base(clientConfig, instConfig, appInfoManager, new PivotalEurekaHttpClient(clientConfig, logFactory), logFactory)
         {
         }
     }

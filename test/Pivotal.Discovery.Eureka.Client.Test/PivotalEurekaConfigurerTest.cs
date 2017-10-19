@@ -18,15 +18,14 @@ using Microsoft.Extensions.Configuration;
 using Steeltoe.CloudFoundry.Connector;
 using Steeltoe.CloudFoundry.Connector.Services;
 using Steeltoe.Discovery.Eureka;
-using Steeltoe.Extensions.Configuration;
 using Steeltoe.Extensions.Configuration.CloudFoundry;
 using System;
 using System.IO;
 using Xunit;
 
-namespace Pivotal.Discovery.Client.Test
+namespace Pivotal.Discovery.Eureka.Client.Test
 {
-    public class EurekaConfigurerTest
+    public class PivotalEurekaConfigurerTest
     {
         [Fact]
         public void UpdateConfiguration_NoServiceInfo_ConfiguresEurekaDiscovery_Correctly()
@@ -95,7 +94,7 @@ namespace Pivotal.Discovery.Client.Test
             var clientSection = config.GetSection(EurekaClientOptions.EUREKA_CLIENT_CONFIGURATION_PREFIX);
             clientSection.Bind(clientOpts);
 
-            EurekaConfigurer.UpdateConfiguration(config, null, clientOpts);
+            PivotalEurekaConfigurer.UpdateConfiguration(config, null, clientOpts);
 
             var co = clientOpts;
             Assert.NotNull(co);
@@ -120,7 +119,7 @@ namespace Pivotal.Discovery.Client.Test
             var instSection = config.GetSection(EurekaInstanceOptions.EUREKA_INSTANCE_CONFIGURATION_PREFIX);
             instSection.Bind(instOpts);
 
-            EurekaConfigurer.UpdateConfiguration(config, null, instOpts);
+            PivotalEurekaConfigurer.UpdateConfiguration(config, null, instOpts);
 
             EurekaInstanceOptions ro = instOpts;
 
@@ -309,7 +308,7 @@ namespace Pivotal.Discovery.Client.Test
             var clientSection = config.GetSection(EurekaClientOptions.EUREKA_CLIENT_CONFIGURATION_PREFIX);
             clientSection.Bind(clientOpts);
 
-            EurekaConfigurer.UpdateConfiguration(config, si, clientOpts);
+            PivotalEurekaConfigurer.UpdateConfiguration(config, si, clientOpts);
 
             var co = clientOpts;
             Assert.NotNull(co);
@@ -338,7 +337,7 @@ namespace Pivotal.Discovery.Client.Test
             var instSection = config.GetSection(EurekaInstanceOptions.EUREKA_INSTANCE_CONFIGURATION_PREFIX);
             instSection.Bind(instOpts);
 
-            EurekaConfigurer.UpdateConfiguration(config, si, instOpts);
+            PivotalEurekaConfigurer.UpdateConfiguration(config, si, instOpts);
 
             var ro = instOpts;
 
@@ -371,10 +370,10 @@ namespace Pivotal.Discovery.Client.Test
             Assert.Equal(6, map.Count);
             Assert.Equal("bar", map["foo"]);
             Assert.Equal("foo", map["bar"]);
-            Assert.Equal("instance_id", map[EurekaConfigurer.INSTANCE_ID]);
-            Assert.Equal("ac923014-93a5-4aee-b934-a043b241868b", map[EurekaConfigurer.CF_APP_GUID]);
-            Assert.Equal("1", map[EurekaConfigurer.CF_INSTANCE_INDEX]);
-            Assert.Equal(EurekaConfigurer.UNKNOWN_ZONE, map[EurekaConfigurer.ZONE]);
+            Assert.Equal("instance_id", map[PivotalEurekaConfigurer.INSTANCE_ID]);
+            Assert.Equal("ac923014-93a5-4aee-b934-a043b241868b", map[PivotalEurekaConfigurer.CF_APP_GUID]);
+            Assert.Equal("1", map[PivotalEurekaConfigurer.CF_INSTANCE_INDEX]);
+            Assert.Equal(PivotalEurekaConfigurer.UNKNOWN_ZONE, map[PivotalEurekaConfigurer.ZONE]);
         }
 
         [Fact]
@@ -524,7 +523,7 @@ namespace Pivotal.Discovery.Client.Test
             var clientSection = config.GetSection(EurekaClientOptions.EUREKA_CLIENT_CONFIGURATION_PREFIX);
             clientSection.Bind(clientOpts);
 
-            EurekaConfigurer.UpdateConfiguration(config, si, clientOpts);
+            PivotalEurekaConfigurer.UpdateConfiguration(config, si, clientOpts);
 
 
             var co = clientOpts;
@@ -554,7 +553,7 @@ namespace Pivotal.Discovery.Client.Test
             var instSection = config.GetSection(EurekaInstanceOptions.EUREKA_INSTANCE_CONFIGURATION_PREFIX);
             instSection.Bind(instOpts);
 
-            EurekaConfigurer.UpdateConfiguration(config, si, instOpts);
+            PivotalEurekaConfigurer.UpdateConfiguration(config, si, instOpts);
 
             var ro = instOpts;
 
@@ -587,10 +586,10 @@ namespace Pivotal.Discovery.Client.Test
             Assert.Equal(6, map.Count);
             Assert.Equal("bar", map["foo"]);
             Assert.Equal("foo", map["bar"]);
-            Assert.Equal("instance_id", map[EurekaConfigurer.INSTANCE_ID]);
-            Assert.Equal("ac923014-93a5-4aee-b934-a043b241868b", map[EurekaConfigurer.CF_APP_GUID]);
-            Assert.Equal("1", map[EurekaConfigurer.CF_INSTANCE_INDEX]);
-            Assert.Equal(EurekaConfigurer.UNKNOWN_ZONE, map[EurekaConfigurer.ZONE]);
+            Assert.Equal("instance_id", map[PivotalEurekaConfigurer.INSTANCE_ID]);
+            Assert.Equal("ac923014-93a5-4aee-b934-a043b241868b", map[PivotalEurekaConfigurer.CF_APP_GUID]);
+            Assert.Equal("1", map[PivotalEurekaConfigurer.CF_INSTANCE_INDEX]);
+            Assert.Equal(PivotalEurekaConfigurer.UNKNOWN_ZONE, map[PivotalEurekaConfigurer.ZONE]);
         }
 
         [Fact]
@@ -741,7 +740,7 @@ namespace Pivotal.Discovery.Client.Test
             var clientSection = config.GetSection(EurekaClientOptions.EUREKA_CLIENT_CONFIGURATION_PREFIX);
             clientSection.Bind(clientOpts);
 
-            EurekaConfigurer.UpdateConfiguration(config, si, clientOpts);
+            PivotalEurekaConfigurer.UpdateConfiguration(config, si, clientOpts);
 
             var co = clientOpts;
 
@@ -772,7 +771,7 @@ namespace Pivotal.Discovery.Client.Test
             var instSection = config.GetSection(EurekaInstanceOptions.EUREKA_INSTANCE_CONFIGURATION_PREFIX);
             instSection.Bind(instOpts);
 
-            EurekaConfigurer.UpdateConfiguration(config, si, instOpts);
+            PivotalEurekaConfigurer.UpdateConfiguration(config, si, instOpts);
 
             var ro = instOpts;
 
@@ -805,10 +804,10 @@ namespace Pivotal.Discovery.Client.Test
             Assert.Equal(6, map.Count);
             Assert.Equal("bar", map["foo"]);
             Assert.Equal("foo", map["bar"]);
-            Assert.Equal("instance_id", map[EurekaConfigurer.INSTANCE_ID]);
-            Assert.Equal("ac923014-93a5-4aee-b934-a043b241868b", map[EurekaConfigurer.CF_APP_GUID]);
-            Assert.Equal("1", map[EurekaConfigurer.CF_INSTANCE_INDEX]);
-            Assert.Equal(EurekaConfigurer.UNKNOWN_ZONE, map[EurekaConfigurer.ZONE]);
+            Assert.Equal("instance_id", map[PivotalEurekaConfigurer.INSTANCE_ID]);
+            Assert.Equal("ac923014-93a5-4aee-b934-a043b241868b", map[PivotalEurekaConfigurer.CF_APP_GUID]);
+            Assert.Equal("1", map[PivotalEurekaConfigurer.CF_INSTANCE_INDEX]);
+            Assert.Equal(PivotalEurekaConfigurer.UNKNOWN_ZONE, map[PivotalEurekaConfigurer.ZONE]);
         }
 
 

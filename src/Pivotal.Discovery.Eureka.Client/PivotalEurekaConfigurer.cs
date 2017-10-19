@@ -1,17 +1,35 @@
-﻿using Steeltoe.CloudFoundry.Connector.Services;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿//
+// Copyright 2017 the original author or authors.
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+// http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+//
 
-namespace Pivotal.Discovery.Client
+using Microsoft.Extensions.Configuration;
+using Steeltoe.CloudFoundry.Connector.Services;
+using Steeltoe.Discovery.Eureka;
+using System;
+
+
+namespace Pivotal.Discovery.Eureka
 {
-    public class DiscoveryClientConfigurer
+    public class PivotalEurekaConfigurer
     {
         internal const string EUREKA_URI_SUFFIX = "/eureka/";
+
         internal const string ROUTE_REGISTRATIONMETHOD = "route";
         internal const string DIRECT_REGISTRATIONMETHOD = "direct";
         internal const string HOST_REGISTRATIONMETHOD = "hostname";
+
         internal const string CF_APP_GUID = "cfAppGuid";
         internal const string CF_INSTANCE_INDEX = "cfInstanceIndex";
         internal const string SURGICAL_ROUTING_HEADER = "X-CF-APP-INSTANCE";
@@ -21,34 +39,14 @@ namespace Pivotal.Discovery.Client
         internal const int DEFAULT_NONSECUREPORT = 80;
         internal const int DEFAULT_SECUREPORT = 443;
 
-        internal DiscoveryOptions Configure(IServiceInfo si, DiscoveryOptions config)
-        {
-            UpdateConfiguration(si, config);
-            return config;
-        }
 
-        internal void UpdateConfiguration(IServiceInfo si, DiscoveryOptions config)
+        public static void UpdateConfiguration(IConfiguration config, EurekaServiceInfo si, EurekaClientOptions clientOptions)
         {
-            EurekaServiceInfo eurekaInfo = si as EurekaServiceInfo;
-            if (eurekaInfo != null)
-            {
-                UpdateConfiguration(eurekaInfo, config);
-            }
-        }
-
-        internal void UpdateConfiguration(EurekaServiceInfo si, DiscoveryOptions config)
-        {
-            if (config == null)
+            if (clientOptions == null || si == null)
             {
                 return;
             }
-            config.ClientType = DiscoveryClientType.EUREKA;
 
-            var clientOptions = config.ClientOptions as EurekaClientOptions;
-            if (clientOptions == null)
-            {
-                return;
-            }
             var uri = si.Uri;
 
             if (!uri.EndsWith(EUREKA_URI_SUFFIX))
@@ -61,8 +59,18 @@ namespace Pivotal.Discovery.Client
             clientOptions.ClientId = si.ClientId;
             clientOptions.ClientSecret = si.ClientSecret;
 
-            var instOptions = config.RegistrationOptions as EurekaInstanceOptions;
+        }
+
+        public static void UpdateConfiguration(IConfiguration config, EurekaServiceInfo si, EurekaInstanceOptions instOptions)
+        {
             if (instOptions == null)
+            {
+                return;
+            }
+
+            EurekaPostConfigurer.UpdateConfiguration(config, instOptions);
+
+            if (si == null)
             {
                 return;
             }
@@ -70,51 +78,51 @@ namespace Pivotal.Discovery.Client
             if (string.IsNullOrEmpty(instOptions.RegistrationMethod) ||
                 ROUTE_REGISTRATIONMETHOD.Equals(instOptions.RegistrationMethod, StringComparison.OrdinalIgnoreCase))
             {
-                UpdateWithDefaultsForRoute(si, instOptions, clientOptions);
+                UpdateWithDefaultsForRoute(si, instOptions);
                 return;
             }
 
             if (DIRECT_REGISTRATIONMETHOD.Equals(instOptions.RegistrationMethod, StringComparison.OrdinalIgnoreCase))
             {
-                UpdateWithDefaultsForDirect(si, instOptions, clientOptions);
+                UpdateWithDefaultsForDirect(si, instOptions);
                 return;
             }
             if (HOST_REGISTRATIONMETHOD.Equals(instOptions.RegistrationMethod, StringComparison.OrdinalIgnoreCase))
             {
-                UpdateWithDefaultsForHost(si, instOptions, clientOptions, instOptions.HostName);
+                UpdateWithDefaultsForHost(si, instOptions, instOptions.HostName);
                 return;
             }
-
         }
-        internal void UpdateWithDefaultsForHost(EurekaServiceInfo si, EurekaInstanceOptions instOptions, EurekaClientOptions clientOptions, string hostName)
+
+        private static void UpdateWithDefaultsForHost(EurekaServiceInfo si, EurekaInstanceOptions instOptions, string hostName)
         {
-            UpdateWithDefaults(si, instOptions, clientOptions);
+            UpdateWithDefaults(si, instOptions);
             instOptions.HostName = hostName;
             instOptions.InstanceId = hostName + ":" + si.ApplicationInfo.InstanceId;
         }
 
-        internal void UpdateWithDefaultsForDirect(EurekaServiceInfo si, EurekaInstanceOptions instOptions, EurekaClientOptions clientOptions)
+        private static void UpdateWithDefaultsForDirect(EurekaServiceInfo si, EurekaInstanceOptions instOptions)
         {
-            UpdateWithDefaults(si, instOptions, clientOptions);
+            UpdateWithDefaults(si, instOptions);
             instOptions.PreferIpAddress = true;
             instOptions.NonSecurePort = si.ApplicationInfo.Port;
             instOptions.SecurePort = si.ApplicationInfo.Port;
             instOptions.InstanceId = si.ApplicationInfo.InternalIP + ":" + si.ApplicationInfo.InstanceId;
         }
 
-        internal void UpdateWithDefaultsForRoute(EurekaServiceInfo si, EurekaInstanceOptions instOptions, EurekaClientOptions clientOptions)
+        private static  void UpdateWithDefaultsForRoute(EurekaServiceInfo si, EurekaInstanceOptions instOptions)
         {
-            UpdateWithDefaults(si, instOptions, clientOptions);
+            UpdateWithDefaults(si, instOptions);
             instOptions.NonSecurePort = DEFAULT_NONSECUREPORT;
             instOptions.SecurePort = DEFAULT_SECUREPORT;
             instOptions.InstanceId = si.ApplicationInfo.ApplicationUris[0] + ":" + si.ApplicationInfo.InstanceId;
 
         }
-        internal void UpdateWithDefaults(EurekaServiceInfo si, EurekaInstanceOptions instOptions, EurekaClientOptions clientOptions)
+        private static void UpdateWithDefaults(EurekaServiceInfo si, EurekaInstanceOptions instOptions)
         {
             instOptions.HostName = si.ApplicationInfo.ApplicationUris[0];
             instOptions.IpAddress = si.ApplicationInfo.InternalIP;
-    
+
             var map = instOptions.MetadataMap;
             map[CF_APP_GUID] = si.ApplicationInfo.ApplicationId;
             map[CF_INSTANCE_INDEX] = si.ApplicationInfo.InstanceIndex.ToString();

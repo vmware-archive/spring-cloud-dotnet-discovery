@@ -14,14 +14,14 @@
 // limitations under the License.
 //
 
-using Microsoft.AspNetCore.Hosting;
+using Autofac;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using Pivotal.Discovery.Eureka;
 using Steeltoe.CloudFoundry.Connector;
 using Steeltoe.CloudFoundry.Connector.Services;
 using Steeltoe.Common.Discovery;
+using Steeltoe.Common.Options.Autofac;
 using Steeltoe.Discovery.Eureka;
 using System;
 using System.Linq;
@@ -29,16 +29,15 @@ using System.Threading;
 
 namespace Pivotal.Discovery.Client
 {
-
-    public static class DiscoveryServiceCollectionExtensions
+    public static class DiscoveryContainerBuilderExtensions
     {
         public const string EUREKA_PREFIX = "eureka";
 
-        public static IServiceCollection AddDiscoveryClient(this IServiceCollection services, DiscoveryOptions discoveryOptions, IDiscoveryLifecycle lifecycle = null)
+        public static void RegisterDiscoveryClient(this ContainerBuilder container, DiscoveryOptions discoveryOptions, IDiscoveryLifecycle lifecycle = null)
         {
-            if (services == null)
+            if (container == null)
             {
-                throw new ArgumentNullException(nameof(services));
+                throw new ArgumentNullException(nameof(container));
             }
 
             if (discoveryOptions == null)
@@ -53,8 +52,8 @@ namespace Pivotal.Discovery.Client
                 {
                     throw new ArgumentException("Missing Client Options");
                 }
-       
-                services.AddSingleton<IOptionsMonitor<EurekaClientOptions>>(new OptionsMonitorWrapper<EurekaClientOptions>(clientOptions));
+                container.RegisterInstance(new OptionsMonitorWrapper<EurekaClientOptions>(clientOptions)).As<IOptionsMonitor<EurekaClientOptions>>().SingleInstance();
+
 
                 var regOptions = discoveryOptions.RegistrationOptions as EurekaInstanceOptions;
                 if (regOptions == null)
@@ -62,24 +61,23 @@ namespace Pivotal.Discovery.Client
                     clientOptions.ShouldRegisterWithEureka = false;
                     regOptions = new EurekaInstanceOptions();
                 }
+                container.RegisterInstance(new OptionsMonitorWrapper<EurekaInstanceOptions>(regOptions)).As<IOptionsMonitor<EurekaInstanceOptions>>().SingleInstance();
 
-                services.AddSingleton<IOptionsMonitor<EurekaInstanceOptions>>(new OptionsMonitorWrapper<EurekaInstanceOptions>(regOptions));
 
-                AddEurekaServices(services, lifecycle);
+                AddEurekaServices(container, lifecycle);
             }
             else
             {
                 throw new ArgumentException("Client type UNKNOWN");
             }
 
-            return services;
         }
 
-        public static IServiceCollection AddDiscoveryClient(this IServiceCollection services, Action<DiscoveryOptions> setupOptions, IDiscoveryLifecycle lifecycle = null)
+        public static void RegisterDiscoveryClient(this ContainerBuilder container, Action<DiscoveryOptions> setupOptions,  IDiscoveryLifecycle lifecycle = null)
         {
-            if (services == null)
+            if (container == null)
             {
-                throw new ArgumentNullException(nameof(services));
+                throw new ArgumentNullException(nameof(container));
             }
 
             if (setupOptions == null)
@@ -90,16 +88,16 @@ namespace Pivotal.Discovery.Client
             var options = new DiscoveryOptions();
             setupOptions(options);
 
-            return services.AddDiscoveryClient(options, lifecycle);
+            container.RegisterDiscoveryClient(options, lifecycle);
 
         }
 
 
-        public static IServiceCollection AddDiscoveryClient(this IServiceCollection services, IConfiguration config, IDiscoveryLifecycle lifecycle = null)
+        public static void RegisterDiscoveryClient(this ContainerBuilder container, IConfiguration config, IDiscoveryLifecycle lifecycle = null)
         {
-            if (services == null)
+            if (container == null)
             {
-                throw new ArgumentNullException(nameof(services));
+                throw new ArgumentNullException(nameof(container));
             }
 
             if (config == null)
@@ -109,16 +107,15 @@ namespace Pivotal.Discovery.Client
 
             IServiceInfo info = GetSingletonDiscoveryServiceInfo(config);
 
-            AddDiscoveryServices(services, info, config, lifecycle);
+            AddDiscoveryServices(container, info, config, lifecycle);
 
-            return services;
 
         }
-        public static IServiceCollection AddDiscoveryClient(this IServiceCollection services, IConfiguration config, string serviceName, IDiscoveryLifecycle lifecycle = null)
+        public static void RegisterDiscoveryClient(this ContainerBuilder container, IConfiguration config, string serviceName, IDiscoveryLifecycle lifecycle = null)
         {
-            if (services == null)
+            if (container == null)
             {
-                throw new ArgumentNullException(nameof(services));
+                throw new ArgumentNullException(nameof(container));
             }
 
             if (string.IsNullOrEmpty(serviceName))
@@ -133,33 +130,43 @@ namespace Pivotal.Discovery.Client
 
             IServiceInfo info = GetNamedDiscoveryServiceInfo(config, serviceName);
 
-            AddDiscoveryServices(services, info, config, lifecycle);
+            AddDiscoveryServices(container, info, config, lifecycle);
 
-            return services;
         }
 
-        private static void AddDiscoveryServices(IServiceCollection services, IServiceInfo info, IConfiguration config, IDiscoveryLifecycle lifecycle)
+        public static void StartDiscoveryClient(this IContainer container)
+        {
+            if (container == null)
+            {
+                throw new ArgumentNullException(nameof(container));
+            }
+
+            container.Resolve<IDiscoveryClient>();
+        }
+
+        private static void AddDiscoveryServices(ContainerBuilder container, IServiceInfo info, IConfiguration config, IDiscoveryLifecycle lifecycle)
         {
             var clientConfigsection = config.GetSection(EUREKA_PREFIX);
             int childCount = clientConfigsection.GetChildren().Count();
             if (childCount > 0 || info is EurekaServiceInfo)
             {
                 EurekaServiceInfo einfo = info as EurekaServiceInfo;
+
                 var clientSection = config.GetSection(EurekaClientOptions.EUREKA_CLIENT_CONFIGURATION_PREFIX);
-                services.Configure<EurekaClientOptions>(clientSection);
-                services.PostConfigure<EurekaClientOptions>((options) =>
+                container.RegisterOption<EurekaClientOptions>(clientSection);
+                container.RegisterPostConfigure<EurekaClientOptions>((options) =>
                 {
                     PivotalEurekaConfigurer.UpdateConfiguration(config, einfo, options);
                 });
 
                 var instSection = config.GetSection(EurekaInstanceOptions.EUREKA_INSTANCE_CONFIGURATION_PREFIX);
-                services.Configure<EurekaInstanceOptions>(instSection);
-                services.PostConfigure<EurekaInstanceOptions>((options) =>
+                container.RegisterOption<EurekaInstanceOptions>(instSection);
+                container.RegisterPostConfigure<EurekaInstanceOptions>((options) =>
                 {
                     PivotalEurekaConfigurer.UpdateConfiguration(config, einfo, options);
                 });
 
-                AddEurekaServices(services, lifecycle);
+                AddEurekaServices(container, lifecycle);
 
             }
             else
@@ -169,21 +176,21 @@ namespace Pivotal.Discovery.Client
 
         }
 
-        private static void AddEurekaServices(IServiceCollection services, IDiscoveryLifecycle lifecycle)
+        private static void AddEurekaServices(ContainerBuilder container, IDiscoveryLifecycle lifecycle)
         {
-            services.AddSingleton<EurekaApplicationInfoManager>();
-            services.AddSingleton<EurekaDiscoveryManager>();
+            container.RegisterType<EurekaApplicationInfoManager>().SingleInstance();
+            container.RegisterType<EurekaDiscoveryManager>().SingleInstance();
 
-            services.AddSingleton<PivotalEurekaDiscoveryClient>();
+            container.RegisterType<PivotalEurekaDiscoveryClient>().AsSelf().As<IDiscoveryClient>().SingleInstance();
+
             if (lifecycle == null)
             {
-                services.AddSingleton<IDiscoveryLifecycle, ApplicationLifecycle>();
+                container.RegisterType<ApplicationLifecycle>().As<IDiscoveryLifecycle>();
             }
             else
             {
-                services.AddSingleton(lifecycle);
+                container.RegisterInstance(lifecycle).SingleInstance();
             }
-            services.AddSingleton<IDiscoveryClient>((p) => p.GetService<PivotalEurekaDiscoveryClient>());
         }
 
         private static IServiceInfo GetNamedDiscoveryServiceInfo(IConfiguration config, string serviceName)
@@ -226,14 +233,24 @@ namespace Pivotal.Discovery.Client
 
         public class ApplicationLifecycle : IDiscoveryLifecycle
         {
+            CancellationTokenSource source = new CancellationTokenSource();
 
-            public ApplicationLifecycle(IApplicationLifetime lifeCycle)
+            public ApplicationLifecycle()
             {
-                ApplicationStopping = lifeCycle.ApplicationStopping;
             }
 
-            public CancellationToken ApplicationStopping { get; set; }
+            public void Shutdown()
+            {
+                source.Cancel();
+            }
 
+            public CancellationToken ApplicationStopping
+            {
+                get
+                {
+                    return source.Token;
+                }
+            }
         }
 
         public class OptionsMonitorWrapper<T> : IOptionsMonitor<T>

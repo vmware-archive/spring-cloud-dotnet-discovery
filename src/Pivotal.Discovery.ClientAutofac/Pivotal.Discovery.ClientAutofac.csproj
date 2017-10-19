@@ -8,9 +8,9 @@
     <VersionSuffix>$(VersionSuffix)</VersionSuffix>
     <Authors>Pivotal;dtillman</Authors>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <AssemblyName>Pivotal.Discovery.ClientCore</AssemblyName>
-    <PackageId>Pivotal.Discovery.ClientCore</PackageId>
-    <PackageTags>Eureka, ASPNET Core, Spring, Spring Cloud, Spring Cloud Services</PackageTags>
+    <AssemblyName>Pivotal.Discovery.ClientAutofac</AssemblyName>
+    <PackageId>Pivotal.Discovery.ClientAutofac</PackageId>
+    <PackageTags>Eureka, Autofac, Spring, Spring Cloud, Spring Cloud Services</PackageTags>
     <PackageIconUrl>http://steeltoe.io/images/transparent.png</PackageIconUrl>
     <PackageProjectUrl>http://steeltoe.io</PackageProjectUrl>
     <PackageLicenseUrl>http://www.apache.org/licenses/LICENSE-2.0</PackageLicenseUrl>
@@ -23,12 +23,10 @@
   <ItemGroup Condition="'$(CI_BUILD)' == 'True'">
     <PackageReference Include="Pivotal.Discovery.Eureka.Client" Version="$(SteeltoeVersion)$(SteeltoeVersionSuffix)" />
   </ItemGroup>
-  
+
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Hosting.Abstractions" Version="$(AspNetCoreVersion)" />
-    <PackageReference Include="Steeltoe.CloudFoundry.Connector" Version="$(SteeltoeConnectorVersion)" />
     <PackageReference Include="Steeltoe.Common" Version="$(SteeltoeCommonVersion)" />
-    <PackageReference Include="Steeltoe.Discovery.Eureka.Client" Version="2.0.0-dev-00141" />
+    <PackageReference Include="Steeltoe.Common.Autofac" Version="$(SteeltoeCommonVersion)" />
   </ItemGroup>
 
 </Project>

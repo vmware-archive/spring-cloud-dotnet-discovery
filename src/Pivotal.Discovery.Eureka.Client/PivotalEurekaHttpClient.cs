@@ -22,9 +22,9 @@ using Steeltoe.Discovery.Eureka;
 using Steeltoe.Common.Http;
 using Microsoft.Extensions.Options;
 
-namespace Pivotal.Discovery.Client
+namespace Pivotal.Discovery.Eureka
 {
-    public class EurekaHttpClient : Steeltoe.Discovery.Eureka.Transport.EurekaHttpClient
+    public class PivotalEurekaHttpClient : Steeltoe.Discovery.Eureka.Transport.EurekaHttpClient
     {
         private const int DEFAULT_GETACCESSTOKEN_TIMEOUT = 10000; // Milliseconds
 
@@ -37,7 +37,7 @@ namespace Pivotal.Discovery.Client
             }
         }
 
-        public EurekaHttpClient(IOptionsMonitor<EurekaClientOptions> config, ILoggerFactory logFactory = null)
+        public PivotalEurekaHttpClient(IOptionsMonitor<EurekaClientOptions> config, ILoggerFactory logFactory = null)
 
         {
             if (config == null)

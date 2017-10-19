@@ -15,7 +15,11 @@ build_script:
   - scripts\appveyor_build.cmd
 artifacts:
 - path: 'src\Pivotal.Discovery.ClientCore\bin\Release\*.nupkg'
+- path: 'src\Pivotal.Discovery.ClientAutofac\bin\Release\*.nupkg'
+- path: 'src\Pivotal.Discovery.Eureka.Client\bin\Release\*.nupkg'
 - path: 'src\Pivotal.Discovery.ClientCore\bin\Debug\*.nupkg'
+- path: 'src\Pivotal.Discovery.ClientAutofac\bin\Debug\*.nupkg'
+- path: 'src\Pivotal.Discovery.Eureka.Client\bin\Debug\*.nupkg'
 deploy:
 - provider: NuGet
   skip_symbols: false
