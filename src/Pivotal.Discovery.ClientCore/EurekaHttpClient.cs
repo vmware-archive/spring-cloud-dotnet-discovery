@@ -64,7 +64,7 @@ namespace Pivotal.Discovery.Client
 
         internal string GetAccessToken()
         {
-            var config = _config as EurekaClientOptions;
+            var config = Config as EurekaClientOptions;
             if (config == null || string.IsNullOrEmpty(config.AccessTokenUri))
             {
                 return null;

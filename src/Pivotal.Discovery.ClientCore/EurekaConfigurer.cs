@@ -63,12 +63,17 @@ namespace Pivotal.Discovery.Client
 
         internal static void UpdateConfiguration(IConfiguration config, EurekaServiceInfo si, EurekaInstanceOptions instOptions)
         {
-            if (instOptions == null || si == null)
+            if (instOptions == null)
             {
                 return;
             }
 
             EurekaPostConfigurer.UpdateConfiguration(config, instOptions);
+
+            if (si == null)
+            {
+                return;
+            }
 
             if (string.IsNullOrEmpty(instOptions.RegistrationMethod) ||
                 ROUTE_REGISTRATIONMETHOD.Equals(instOptions.RegistrationMethod, StringComparison.OrdinalIgnoreCase))

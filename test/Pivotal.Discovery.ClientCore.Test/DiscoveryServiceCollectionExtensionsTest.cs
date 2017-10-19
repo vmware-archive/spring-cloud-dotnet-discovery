@@ -25,6 +25,7 @@ using System.Threading;
 using Steeltoe.Discovery.Eureka;
 using Steeltoe.CloudFoundry.Connector;
 using Steeltoe.Extensions.Configuration;
+using Steeltoe.Extensions.Configuration.CloudFoundry;
 
 namespace Pivotal.Discovery.Client.Test
 {
