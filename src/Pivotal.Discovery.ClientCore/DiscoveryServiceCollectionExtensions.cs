@@ -1,5 +1,4 @@
-﻿//
-// Copyright 2017 the original author or authors.
+﻿// Copyright 2017 the original author or authors.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -12,7 +11,6 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-//
 
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -29,7 +27,6 @@ using System.Threading;
 
 namespace Pivotal.Discovery.Client
 {
-
     public static class DiscoveryServiceCollectionExtensions
     {
         public const string EUREKA_PREFIX = "eureka";
@@ -53,7 +50,7 @@ namespace Pivotal.Discovery.Client
                 {
                     throw new ArgumentException("Missing Client Options");
                 }
-       
+
                 services.AddSingleton<IOptionsMonitor<EurekaClientOptions>>(new OptionsMonitorWrapper<EurekaClientOptions>(clientOptions));
 
                 var regOptions = discoveryOptions.RegistrationOptions as EurekaInstanceOptions;
@@ -91,9 +88,7 @@ namespace Pivotal.Discovery.Client
             setupOptions(options);
 
             return services.AddDiscoveryClient(options, lifecycle);
-
         }
-
 
         public static IServiceCollection AddDiscoveryClient(this IServiceCollection services, IConfiguration config, IDiscoveryLifecycle lifecycle = null)
         {
@@ -112,8 +107,8 @@ namespace Pivotal.Discovery.Client
             AddDiscoveryServices(services, info, config, lifecycle);
 
             return services;
-
         }
+
         public static IServiceCollection AddDiscoveryClient(this IServiceCollection services, IConfiguration config, string serviceName, IDiscoveryLifecycle lifecycle = null)
         {
             if (services == null)
@@ -160,13 +155,11 @@ namespace Pivotal.Discovery.Client
                 });
 
                 AddEurekaServices(services, lifecycle);
-
             }
             else
             {
                 throw new ArgumentException("Discovery client type UNKNOWN, check configuration");
             }
-
         }
 
         private static void AddEurekaServices(IServiceCollection services, IDiscoveryLifecycle lifecycle)
@@ -183,6 +176,7 @@ namespace Pivotal.Discovery.Client
             {
                 services.AddSingleton(lifecycle);
             }
+
             services.AddSingleton<IDiscoveryClient>((p) => p.GetService<PivotalEurekaDiscoveryClient>());
         }
 
@@ -213,6 +207,7 @@ namespace Pivotal.Discovery.Client
                 {
                     throw new ConnectorException(string.Format("Multiple discovery service types bound to application."));
                 }
+
                 return eurekaInfos[0];
             }
 
@@ -226,23 +221,23 @@ namespace Pivotal.Discovery.Client
 
         public class ApplicationLifecycle : IDiscoveryLifecycle
         {
-
             public ApplicationLifecycle(IApplicationLifetime lifeCycle)
             {
                 ApplicationStopping = lifeCycle.ApplicationStopping;
             }
 
             public CancellationToken ApplicationStopping { get; set; }
-
         }
 
         public class OptionsMonitorWrapper<T> : IOptionsMonitor<T>
         {
             private T _option;
+
             public OptionsMonitorWrapper(T option)
             {
                 _option = option;
             }
+
             public T CurrentValue => _option;
 
             public T Get(string name)

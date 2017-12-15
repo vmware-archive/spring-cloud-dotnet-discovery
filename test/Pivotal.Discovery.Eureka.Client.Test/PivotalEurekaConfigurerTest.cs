@@ -1,5 +1,4 @@
-﻿//
-// Copyright 2015 the original author or authors.
+﻿// Copyright 2017 the original author or authors.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -12,7 +11,6 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-//
 
 using Microsoft.Extensions.Configuration;
 using Steeltoe.CloudFoundry.Connector;
@@ -293,16 +291,13 @@ namespace Pivotal.Discovery.Eureka.Client.Test
             ConfigurationBuilder configurationBuilder = new ConfigurationBuilder();
             configurationBuilder.SetBasePath(directory);
 
-
             configurationBuilder.AddJsonFile(fileName);
             configurationBuilder.AddCloudFoundry();
             var config = configurationBuilder.Build();
 
-
             var sis = config.GetServiceInfos<EurekaServiceInfo>();
             Assert.Single(sis);
             EurekaServiceInfo si = sis[0];
-
 
             var clientOpts = new EurekaClientOptions();
             var clientSection = config.GetSection(EurekaClientOptions.EUREKA_CLIENT_CONFIGURATION_PREFIX);
@@ -331,7 +326,6 @@ namespace Pivotal.Discovery.Eureka.Client.Test
             Assert.Equal("https://p-spring-cloud-services.uaa.system.testcloud.com/oauth/token", co.AccessTokenUri);
             Assert.Equal("p-service-registry-06e28efd-24be-4ce3-9784-854ed8d2acbe", co.ClientId);
             Assert.Equal("dCsdoiuklicS", co.ClientSecret);
-
 
             var instOpts = new EurekaInstanceOptions();
             var instSection = config.GetSection(EurekaInstanceOptions.EUREKA_INSTANCE_CONFIGURATION_PREFIX);
@@ -509,11 +503,9 @@ namespace Pivotal.Discovery.Eureka.Client.Test
             ConfigurationBuilder configurationBuilder = new ConfigurationBuilder();
             configurationBuilder.SetBasePath(directory);
 
-
             configurationBuilder.AddJsonFile(fileName);
             configurationBuilder.AddCloudFoundry();
             var config = configurationBuilder.Build();
-
 
             var sis = config.GetServiceInfos<EurekaServiceInfo>();
             Assert.Single(sis);
@@ -524,7 +516,6 @@ namespace Pivotal.Discovery.Eureka.Client.Test
             clientSection.Bind(clientOpts);
 
             PivotalEurekaConfigurer.UpdateConfiguration(config, si, clientOpts);
-
 
             var co = clientOpts;
             Assert.NotNull(co);
@@ -547,7 +538,6 @@ namespace Pivotal.Discovery.Eureka.Client.Test
             Assert.Equal("https://p-spring-cloud-services.uaa.system.testcloud.com/oauth/token", co.AccessTokenUri);
             Assert.Equal("p-service-registry-06e28efd-24be-4ce3-9784-854ed8d2acbe", co.ClientId);
             Assert.Equal("dCsdoiuklicS", co.ClientSecret);
-
 
             var instOpts = new EurekaInstanceOptions();
             var instSection = config.GetSection(EurekaInstanceOptions.EUREKA_INSTANCE_CONFIGURATION_PREFIX);
@@ -726,11 +716,9 @@ namespace Pivotal.Discovery.Eureka.Client.Test
             ConfigurationBuilder configurationBuilder = new ConfigurationBuilder();
             configurationBuilder.SetBasePath(directory);
 
-
             configurationBuilder.AddJsonFile(fileName);
             configurationBuilder.AddCloudFoundry();
             var config = configurationBuilder.Build();
-
 
             var sis = config.GetServiceInfos<EurekaServiceInfo>();
             Assert.Single(sis);
@@ -764,8 +752,6 @@ namespace Pivotal.Discovery.Eureka.Client.Test
             Assert.Equal("https://p-spring-cloud-services.uaa.system.testcloud.com/oauth/token", co.AccessTokenUri);
             Assert.Equal("p-service-registry-06e28efd-24be-4ce3-9784-854ed8d2acbe", co.ClientId);
             Assert.Equal("dCsdoiuklicS", co.ClientSecret);
-
-
 
             var instOpts = new EurekaInstanceOptions();
             var instSection = config.GetSection(EurekaInstanceOptions.EUREKA_INSTANCE_CONFIGURATION_PREFIX);
@@ -809,7 +795,5 @@ namespace Pivotal.Discovery.Eureka.Client.Test
             Assert.Equal("1", map[PivotalEurekaConfigurer.CF_INSTANCE_INDEX]);
             Assert.Equal(PivotalEurekaConfigurer.UNKNOWN_ZONE, map[PivotalEurekaConfigurer.ZONE]);
         }
-
-
     }
 }

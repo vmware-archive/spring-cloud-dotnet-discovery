@@ -12,18 +12,23 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-using Microsoft.AspNetCore.Builder;
-using Microsoft.Extensions.DependencyInjection;
-using Steeltoe.Common.Discovery;
+using Microsoft.AspNetCore.Hosting;
+using System;
+using System.Threading;
 
-namespace Pivotal.Discovery.Client
+namespace Pivotal.Discovery.Client.Test
 {
-    public static class DiscoveryApplicationBuilderExtensions
+    public class TestApplicationLifetime : IApplicationLifetime
     {
-        public static IApplicationBuilder UseDiscoveryClient(this IApplicationBuilder app)
+        public CancellationToken ApplicationStarted => throw new NotImplementedException();
+
+        public CancellationToken ApplicationStopping => new CancellationTokenSource().Token;
+
+        public CancellationToken ApplicationStopped => throw new NotImplementedException();
+
+        public void StopApplication()
         {
-            var service = app.ApplicationServices.GetRequiredService<IDiscoveryClient>();
-            return app;
+            throw new NotImplementedException();
         }
     }
 }

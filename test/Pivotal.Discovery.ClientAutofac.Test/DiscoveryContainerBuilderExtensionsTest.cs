@@ -1,5 +1,4 @@
-﻿//
-// Copyright 2017 the original author or authors.
+﻿// Copyright 2017 the original author or authors.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -12,22 +11,20 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-//
 
-using Microsoft.Extensions.Configuration;
-using System;
-using Xunit;
-using System.IO;
-using Steeltoe.Common.Discovery;
-using Steeltoe.Discovery.Eureka;
 using Autofac;
+using Microsoft.Extensions.Configuration;
+using Steeltoe.Common.Discovery;
 using Steeltoe.Common.Options.Autofac;
+using Steeltoe.Discovery.Eureka;
+using System;
+using System.IO;
+using Xunit;
 
 namespace Pivotal.Discovery.Client.Test
 {
-    public class DiscoveryContainerBuilderExtensionsTest 
+    public class DiscoveryContainerBuilderExtensionsTest
     {
-
         [Fact]
         public void RegisteriscoveryClient_ThrowsIfContainerNull()
         {
@@ -56,7 +53,6 @@ namespace Pivotal.Discovery.Client.Test
             // Act and Assert
             var ex = Assert.Throws<ArgumentNullException>(() => DiscoveryContainerBuilderExtensions.RegisterDiscoveryClient(services, config));
             Assert.Contains(nameof(config), ex.Message);
-
         }
 
         [Fact]
@@ -69,8 +65,8 @@ namespace Pivotal.Discovery.Client.Test
             // Act and Assert
             var ex = Assert.Throws<ArgumentNullException>(() => DiscoveryContainerBuilderExtensions.RegisterDiscoveryClient(services, discoveryOptions));
             Assert.Contains(nameof(discoveryOptions), ex.Message);
-
         }
+
         [Fact]
         public void RegisteriscoveryClient_ThrowsIfDiscoveryOptionsClientType_Unknown()
         {
@@ -81,7 +77,6 @@ namespace Pivotal.Discovery.Client.Test
             // Act and Assert
             var ex = Assert.Throws<ArgumentException>(() => DiscoveryContainerBuilderExtensions.RegisterDiscoveryClient(services, discoveryOptions));
             Assert.Contains("UNKNOWN", ex.Message);
-
         }
 
         [Fact]
@@ -94,7 +89,6 @@ namespace Pivotal.Discovery.Client.Test
             // Act and Assert
             var ex = Assert.Throws<ArgumentNullException>(() => DiscoveryContainerBuilderExtensions.RegisterDiscoveryClient(services, setupOptions));
             Assert.Contains(nameof(setupOptions), ex.Message);
-
         }
 
         [Fact]
@@ -132,7 +126,6 @@ namespace Pivotal.Discovery.Client.Test
 
             var service = services.Build().Resolve<IDiscoveryClient>();
             Assert.NotNull(service);
-
         }
 
         [Fact]
@@ -158,8 +151,6 @@ namespace Pivotal.Discovery.Client.Test
 
             var services = new ContainerBuilder();
             Assert.Throws<ArgumentException>(() => services.RegisterDiscoveryClient(config));
-
-
         }
 
         [Fact]
@@ -174,7 +165,6 @@ namespace Pivotal.Discovery.Client.Test
                     ShouldFetchRegistry = false,
                     ShouldRegisterWithEureka = false
                 }
-
             };
 
             var services = new ContainerBuilder();
@@ -183,7 +173,6 @@ namespace Pivotal.Discovery.Client.Test
 
             var service = services.Build().Resolve<IDiscoveryClient>();
             Assert.NotNull(service);
-
         }
 
         [Fact]
@@ -195,11 +184,10 @@ namespace Pivotal.Discovery.Client.Test
                 ClientType = DiscoveryClientType.EUREKA,
                 ClientOptions = null,
                 RegistrationOptions = null
-
             };
 
             var services = new ContainerBuilder();
-  
+
             Assert.Throws<ArgumentException>(() => services.RegisterDiscoveryClient(options));
         }
 
@@ -218,12 +206,10 @@ namespace Pivotal.Discovery.Client.Test
                    ShouldRegisterWithEureka = false
                };
                options.RegistrationOptions = new EurekaInstanceOptions();
-
            });
 
             var service = services.Build().Resolve<IDiscoveryClient>();
             Assert.NotNull(service);
-
         }
     }
 }

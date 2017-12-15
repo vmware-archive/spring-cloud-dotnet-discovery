@@ -1,5 +1,4 @@
-﻿//
-// Copyright 2017 the original author or authors.
+﻿// Copyright 2017 the original author or authors.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -12,13 +11,11 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-//
 
 using Microsoft.Extensions.Configuration;
 using Steeltoe.CloudFoundry.Connector.Services;
 using Steeltoe.Discovery.Eureka;
 using System;
-
 
 namespace Pivotal.Discovery.Eureka
 {
@@ -39,7 +36,6 @@ namespace Pivotal.Discovery.Eureka
         internal const int DEFAULT_NONSECUREPORT = 80;
         internal const int DEFAULT_SECUREPORT = 443;
 
-
         public static void UpdateConfiguration(IConfiguration config, EurekaServiceInfo si, EurekaClientOptions clientOptions)
         {
             if (clientOptions == null || si == null)
@@ -58,7 +54,6 @@ namespace Pivotal.Discovery.Eureka
             clientOptions.AccessTokenUri = si.TokenUri;
             clientOptions.ClientId = si.ClientId;
             clientOptions.ClientSecret = si.ClientSecret;
-
         }
 
         public static void UpdateConfiguration(IConfiguration config, EurekaServiceInfo si, EurekaInstanceOptions instOptions)
@@ -87,6 +82,7 @@ namespace Pivotal.Discovery.Eureka
                 UpdateWithDefaultsForDirect(si, instOptions);
                 return;
             }
+
             if (HOST_REGISTRATIONMETHOD.Equals(instOptions.RegistrationMethod, StringComparison.OrdinalIgnoreCase))
             {
                 UpdateWithDefaultsForHost(si, instOptions, instOptions.HostName);
@@ -110,14 +106,14 @@ namespace Pivotal.Discovery.Eureka
             instOptions.InstanceId = si.ApplicationInfo.InternalIP + ":" + si.ApplicationInfo.InstanceId;
         }
 
-        private static  void UpdateWithDefaultsForRoute(EurekaServiceInfo si, EurekaInstanceOptions instOptions)
+        private static void UpdateWithDefaultsForRoute(EurekaServiceInfo si, EurekaInstanceOptions instOptions)
         {
             UpdateWithDefaults(si, instOptions);
             instOptions.NonSecurePort = DEFAULT_NONSECUREPORT;
             instOptions.SecurePort = DEFAULT_SECUREPORT;
             instOptions.InstanceId = si.ApplicationInfo.ApplicationUris[0] + ":" + si.ApplicationInfo.InstanceId;
-
         }
+
         private static void UpdateWithDefaults(EurekaServiceInfo si, EurekaInstanceOptions instOptions)
         {
             instOptions.HostName = si.ApplicationInfo.ApplicationUris[0];

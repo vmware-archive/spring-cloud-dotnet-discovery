@@ -1,5 +1,4 @@
-﻿//
-// Copyright 2015 the original author or authors.
+﻿// Copyright 2017 the original author or authors.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -12,15 +11,14 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-//
 
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
+using Steeltoe.Common.Http;
+using Steeltoe.Discovery.Eureka;
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
-using Steeltoe.Discovery.Eureka;
-using Steeltoe.Common.Http;
-using Microsoft.Extensions.Options;
 
 namespace Pivotal.Discovery.Eureka
 {
@@ -29,6 +27,7 @@ namespace Pivotal.Discovery.Eureka
         private const int DEFAULT_GETACCESSTOKEN_TIMEOUT = 10000; // Milliseconds
 
         private IOptionsMonitor<EurekaClientOptions> _configOptions;
+
         protected override IEurekaClientConfig Config
         {
             get
@@ -38,20 +37,31 @@ namespace Pivotal.Discovery.Eureka
         }
 
         public PivotalEurekaHttpClient(IOptionsMonitor<EurekaClientOptions> config, ILoggerFactory logFactory = null)
-
         {
-            if (config == null)
-            {
-                throw new ArgumentNullException(nameof(config));
-            }
             _config = null;
-            _configOptions = config;
-            base.Initialize(new Dictionary<string, string>(), logFactory);
+            _configOptions = config ?? throw new ArgumentNullException(nameof(config));
+            Initialize(new Dictionary<string, string>(), logFactory);
+        }
+
+        internal string FetchAccessToken()
+        {
+            var config = Config as EurekaClientOptions;
+            if (config == null || string.IsNullOrEmpty(config.AccessTokenUri))
+            {
+                return null;
+            }
+
+            return HttpClientHelper.GetAccessToken(
+                config.AccessTokenUri,
+                config.ClientId,
+                config.ClientSecret,
+                DEFAULT_GETACCESSTOKEN_TIMEOUT,
+                config.ValidateCertificates).Result;
         }
 
         protected override HttpRequestMessage GetRequestMessage(HttpMethod method, Uri requestUri)
         {
-            var request = HttpClientHelper.GetRequestMessage(method, requestUri.ToString(), GetAccessToken);
+            var request = HttpClientHelper.GetRequestMessage(method, requestUri.ToString(), FetchAccessToken);
 
             foreach (var header in _headers)
             {
@@ -60,18 +70,6 @@ namespace Pivotal.Discovery.Eureka
 
             request.Headers.Add("Accept", "application/json");
             return request;
-        }
-
-        internal string GetAccessToken()
-        {
-            var config = Config as EurekaClientOptions;
-            if (config == null || string.IsNullOrEmpty(config.AccessTokenUri))
-            {
-                return null;
-            }
-
-            return HttpClientHelper.GetAccessToken(config.AccessTokenUri, config.ClientId, config.ClientSecret, DEFAULT_GETACCESSTOKEN_TIMEOUT, config.ValidateCertificates).Result;
-
         }
     }
 }
