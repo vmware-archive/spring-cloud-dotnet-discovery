@@ -26,7 +26,7 @@
   
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Hosting.Abstractions" Version="$(AspNetCoreVersion)" />
-    <PackageReference Include="Steeltoe.CloudFoundry.Connector" Version="$(SteeltoeConnectorVersion)" />
+    <PackageReference Include="Steeltoe.CloudFoundry.ConnectorBase" Version="$(SteeltoeConnectorVersion)" />
     <PackageReference Include="Steeltoe.Common" Version="$(SteeltoeCommonVersion)" />
     <PackageReference Include="Steeltoe.Discovery.Eureka.Client" Version="$(SteeltoeEurekaVersion)" />
     <PackageReference Include="StyleCop.Analyzers" Version="$(StyleCopVersion)">

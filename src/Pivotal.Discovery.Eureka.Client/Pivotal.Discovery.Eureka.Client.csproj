@@ -18,7 +18,7 @@
 
   <ItemGroup>
     <PackageReference Include="Steeltoe.Discovery.Eureka.Client" Version="$(SteeltoeEurekaVersion)" />
-    <PackageReference Include="Steeltoe.CloudFoundry.Connector" Version="$(SteeltoeConnectorVersion)" />
+    <PackageReference Include="Steeltoe.CloudFoundry.ConnectorBase" Version="$(SteeltoeConnectorVersion)" />
     <PackageReference Include="StyleCop.Analyzers" Version="$(StyleCopVersion)">
       <PrivateAssets>All</PrivateAssets>
     </PackageReference>
