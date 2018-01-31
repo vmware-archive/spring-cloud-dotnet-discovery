@@ -2,4 +2,4 @@
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
-[assembly: InternalsVisibleTo("Pivotal.Discovery.Eureka.Client.Test")]
+[assembly: InternalsVisibleTo("Pivotal.Discovery.EurekaBase.Test")]

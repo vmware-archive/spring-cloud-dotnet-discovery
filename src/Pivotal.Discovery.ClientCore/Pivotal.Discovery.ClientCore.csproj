@@ -17,18 +17,18 @@
   </PropertyGroup>
 
   <ItemGroup Condition="'$(CI_BUILD)' == ''">
-    <ProjectReference Include="..\Pivotal.Discovery.Eureka.Client\Pivotal.Discovery.Eureka.Client.csproj" />
+    <ProjectReference Include="..\Pivotal.Discovery.EurekaBase\Pivotal.Discovery.EurekaBase.csproj" />
   </ItemGroup>
 
   <ItemGroup Condition="'$(CI_BUILD)' == 'True'">
-    <PackageReference Include="Pivotal.Discovery.Eureka.Client" Version="$(SteeltoeVersion)$(SteeltoeVersionSuffix)" />
+    <PackageReference Include="Pivotal.Discovery.EurekaBase" Version="$(SteeltoeVersion)$(SteeltoeVersionSuffix)" />
   </ItemGroup>
   
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Hosting.Abstractions" Version="$(AspNetCoreVersion)" />
     <PackageReference Include="Steeltoe.CloudFoundry.ConnectorBase" Version="$(SteeltoeConnectorVersion)" />
     <PackageReference Include="Steeltoe.Common" Version="$(SteeltoeCommonVersion)" />
-    <PackageReference Include="Steeltoe.Discovery.Eureka.Client" Version="$(SteeltoeEurekaVersion)" />
+    <PackageReference Include="Steeltoe.Discovery.EurekaBase" Version="$(SteeltoeEurekaVersion)" />
     <PackageReference Include="StyleCop.Analyzers" Version="$(StyleCopVersion)">
       <PrivateAssets>All</PrivateAssets>
     </PackageReference>

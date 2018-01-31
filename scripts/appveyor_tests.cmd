@@ -13,7 +13,7 @@ dotnet xunit -verbose
 if not "%errorlevel%"=="0" goto failure
 cd ..\..
 
-cd test\Pivotal.Discovery.Eureka.Client.Test
+cd test\Pivotal.Discovery.EurekaBase.Test
 dotnet restore --configfile ..\..\nuget.config
 dotnet xunit -verbose
 if not "%errorlevel%"=="0" goto failure

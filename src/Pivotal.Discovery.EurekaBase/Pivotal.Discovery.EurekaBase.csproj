@@ -8,8 +8,8 @@
     <VersionSuffix>$(VersionSuffix)</VersionSuffix>
     <Authors>Pivotal;dtillman</Authors>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <AssemblyName>Pivotal.Discovery.Eureka.Client</AssemblyName>
-    <PackageId>Pivotal.Discovery.Eureka.Client</PackageId>
+    <AssemblyName>Pivotal.Discovery.EurekaBase</AssemblyName>
+    <PackageId>Pivotal.Discovery.EurekaBase</PackageId>
     <PackageTags>Eureka, Spring, Spring Cloud, Spring Cloud Services</PackageTags>
     <PackageIconUrl>http://steeltoe.io/images/transparent.png</PackageIconUrl>
     <PackageProjectUrl>http://steeltoe.io</PackageProjectUrl>
@@ -17,8 +17,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Steeltoe.Discovery.Eureka.Client" Version="$(SteeltoeEurekaVersion)" />
     <PackageReference Include="Steeltoe.CloudFoundry.ConnectorBase" Version="$(SteeltoeConnectorVersion)" />
+    <PackageReference Include="Steeltoe.Discovery.EurekaBase" Version="$(SteeltoeEurekaVersion)" />
     <PackageReference Include="StyleCop.Analyzers" Version="$(StyleCopVersion)">
       <PrivateAssets>All</PrivateAssets>
     </PackageReference>

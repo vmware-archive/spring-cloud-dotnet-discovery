@@ -2,7 +2,7 @@
 
 echo Code is built in Unit Tests
 
-cd src/Pivotal.Discovery.Eureka.Client
+cd src/Pivotal.Discovery.EurekaBase
 dotnet restore --configfile ../../nuget.config
 cd ../..
 
