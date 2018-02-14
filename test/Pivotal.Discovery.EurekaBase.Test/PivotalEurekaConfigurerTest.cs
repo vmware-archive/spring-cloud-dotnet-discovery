@@ -347,8 +347,8 @@ namespace Pivotal.Discovery.Eureka.Client.Test
             Assert.True(ro.SecurePortEnabled);
             Assert.Equal(100, ro.LeaseExpirationDurationInSeconds);
             Assert.Equal(100, ro.LeaseRenewalIntervalInSeconds);
-            Assert.Equal("foo", ro.SecureVirtualHostName);
-            Assert.Equal("foo", ro.VirtualHostName);
+            Assert.Equal("secureVipAddress", ro.SecureVirtualHostName);
+            Assert.Equal("vipAddress", ro.VirtualHostName);
             Assert.Equal("asgName", ro.ASGName);
 
             Assert.Equal("statusPageUrlPath", ro.StatusPageUrlPath);
@@ -559,8 +559,8 @@ namespace Pivotal.Discovery.Eureka.Client.Test
             Assert.True(ro.SecurePortEnabled);
             Assert.Equal(100, ro.LeaseExpirationDurationInSeconds);
             Assert.Equal(100, ro.LeaseRenewalIntervalInSeconds);
-            Assert.Equal("foo", ro.SecureVirtualHostName);
-            Assert.Equal("foo", ro.VirtualHostName);
+            Assert.Equal("secureVipAddress", ro.SecureVirtualHostName);
+            Assert.Equal("vipAddress", ro.VirtualHostName);
             Assert.Equal("asgName", ro.ASGName);
 
             Assert.Equal("statusPageUrlPath", ro.StatusPageUrlPath);
