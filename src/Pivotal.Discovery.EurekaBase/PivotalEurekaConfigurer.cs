@@ -116,6 +116,7 @@ namespace Pivotal.Discovery.Eureka
 
         private static void UpdateWithDefaults(EurekaServiceInfo si, EurekaInstanceOptions instOptions)
         {
+
             if (si.ApplicationInfo.ApplicationUris != null &&
                 si.ApplicationInfo.ApplicationUris.Length > 0)
             {
@@ -127,7 +128,6 @@ namespace Pivotal.Discovery.Eureka
             }
 
             instOptions.IpAddress = si.ApplicationInfo.InternalIP;
-
             var map = instOptions.MetadataMap;
             map[CF_APP_GUID] = si.ApplicationInfo.ApplicationId;
             map[CF_INSTANCE_INDEX] = si.ApplicationInfo.InstanceIndex.ToString();
