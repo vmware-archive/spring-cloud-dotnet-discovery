@@ -11,8 +11,8 @@
     <AssemblyName>Pivotal.Discovery.ClientAutofac</AssemblyName>
     <PackageId>Pivotal.Discovery.ClientAutofac</PackageId>
     <PackageTags>Eureka, Autofac, Spring, Spring Cloud, Spring Cloud Services</PackageTags>
-    <PackageIconUrl>http://steeltoe.io/images/transparent.png</PackageIconUrl>
-    <PackageProjectUrl>http://steeltoe.io</PackageProjectUrl>
+    <PackageIconUrl>https://steeltoe.io/images/transparent.png</PackageIconUrl>
+    <PackageProjectUrl>https://steeltoe.io</PackageProjectUrl>
     <PackageLicenseUrl>http://www.apache.org/licenses/LICENSE-2.0</PackageLicenseUrl>
   </PropertyGroup>
 

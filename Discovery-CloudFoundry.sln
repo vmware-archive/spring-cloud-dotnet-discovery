@@ -8,30 +8,18 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{3793597B-B
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "config", "config", "{C84C50FF-733E-4F4F-8002-9E097568E9F1}"
 	ProjectSection(SolutionItems) = preProject
-		config\nuget-dev.config = config\nuget-dev.config
-		config\nuget-master.config = config\nuget-master.config
-		config\nuget-update.config = config\nuget-update.config
-		config\nuget.config = config\nuget.config
 		config\versions-dev.props = config\versions-dev.props
 		config\versions-master.props = config\versions-master.props
-		config\versions-update.props = config\versions-update.props
 		config\versions.props = config\versions.props
-	EndProjectSection
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "scripts", "scripts", "{23D9169A-721F-441E-8248-19ECB64081F6}"
-	ProjectSection(SolutionItems) = preProject
-		scripts\appveyor_build.cmd = scripts\appveyor_build.cmd
-		scripts\appveyor_install.cmd = scripts\appveyor_install.cmd
-		scripts\appveyor_tests.cmd = scripts\appveyor_tests.cmd
-		scripts\travis_build.sh = scripts\travis_build.sh
-		scripts\travis_install.sh = scripts\travis_install.sh
-		scripts\travis_test.sh = scripts\travis_test.sh
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{BEABA039-9FAD-437A-B293-522A24944457}"
 	ProjectSection(SolutionItems) = preProject
+		.appveyor.yml = .appveyor.yml
 		.travis.yml = .travis.yml
-		appveyor.yml = appveyor.yml
+		nuget.config = nuget.config
+		README.md = README.md
+		stylecop.json = stylecop.json
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Pivotal.Discovery.ClientCore", "src\Pivotal.Discovery.ClientCore\Pivotal.Discovery.ClientCore.csproj", "{75CDA0C6-8D48-421F-8D09-ADB5C4902C43}"
