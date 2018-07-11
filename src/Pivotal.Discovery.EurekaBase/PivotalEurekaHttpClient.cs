@@ -76,11 +76,7 @@ namespace Pivotal.Discovery.Eureka
             }
             else
             {
-                var accessToken = FetchAccessToken();
-                if (accessToken != null)
-                {
-                    request = HttpClientHelper.GetRequestMessage(method, rawUri, FetchAccessToken);
-                }
+                request = HttpClientHelper.GetRequestMessage(method, rawUri, FetchAccessToken);
             }
 
             foreach (var header in _headers)
