@@ -63,25 +63,23 @@ namespace Pivotal.Discovery.Eureka
         protected override HttpRequestMessage GetRequestMessage(HttpMethod method, Uri requestUri)
         {
             string rawUri = requestUri.GetComponents(UriComponents.HttpRequestUrl, UriFormat.Unescaped);
+            string rawUserInfo = requestUri.GetComponents(UriComponents.UserInfo, UriFormat.Unescaped);
             var request = new HttpRequestMessage(method, rawUri);
 
-            var accessToken = FetchAccessToken();
-            if (accessToken != null)
+            if (!string.IsNullOrEmpty(rawUserInfo) && rawUserInfo.Contains(":"))
             {
-                request = HttpClientHelper.GetRequestMessage(method, rawUri, FetchAccessToken);
+                string[] userInfo = GetUserInfo(rawUserInfo);
+                if (userInfo.Length >= 2)
+                {
+                    request = HttpClientHelper.GetRequestMessage(method, rawUri, userInfo[0], userInfo[1]);
+                }
             }
             else
             {
-                string rawUserInfo = requestUri.GetComponents(UriComponents.UserInfo, UriFormat.Unescaped);
-
-                request = new HttpRequestMessage(method, rawUri);
-                if (!string.IsNullOrEmpty(rawUserInfo) && rawUserInfo.Contains(":"))
+                var accessToken = FetchAccessToken();
+                if (accessToken != null)
                 {
-                    string[] userInfo = GetUserInfo(rawUserInfo);
-                    if (userInfo.Length >= 2)
-                    {
-                        request = HttpClientHelper.GetRequestMessage(method, rawUri, userInfo[0], userInfo[1]);
-                    }
+                    request = HttpClientHelper.GetRequestMessage(method, rawUri, FetchAccessToken);
                 }
             }
 
