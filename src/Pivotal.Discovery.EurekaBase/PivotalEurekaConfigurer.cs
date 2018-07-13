@@ -116,7 +116,11 @@ namespace Pivotal.Discovery.Eureka
 
         private static void UpdateWithDefaults(EurekaServiceInfo si, EurekaInstanceOptions instOptions)
         {
-            instOptions.HostName = si.ApplicationInfo.ApplicationUris[0];
+            if (si.ApplicationInfo.ApplicationUris != null && si.ApplicationInfo.ApplicationUris.Length > 0)
+            {
+                instOptions.HostName = si.ApplicationInfo.ApplicationUris[0];
+            }
+
             instOptions.IpAddress = si.ApplicationInfo.InternalIP;
 
             var map = instOptions.MetadataMap;

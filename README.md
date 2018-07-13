@@ -2,7 +2,7 @@
 
 A Service Registry provides a database which applications can use in implementing the Service Discovery pattern; one of the key tenets of a microservice-based architecture. Trying to hand-configure each client of a service or adopt some form of access convention can be difficult and prove to be brittle in production. Instead, your applications can use a Service Registry to dynamically discover and call registered services.
 
-There are several popular options for Service Registries. Netflix built and then open-sourced their own service registry, Eureka. Another relatively new, but increasingly popular option is Consul. 
+There are several popular options for Service Registries. Netflix built and then open-sourced their own service registry, Eureka. Another relatively new, but increasingly popular option is Consul.
 
 This repo contains various packages for interacting with Service Registries.  The [Pivotal.Discovery.Client](https://github.com/pivotal-cf/spring-cloud-dotnet-discovery/tree/master/src/Pivotal.Discovery.Client) provides a configurable generalized interface to Service Discovery and Registration.  Currently you can use the client to work with the [Spring Cloud Services Eureka Server](http://docs.pivotal.io/spring-cloud-services/service-registry/) as a Service Registry. In the near future support will be added for others.
 
@@ -24,17 +24,15 @@ Currently all of the code and samples have been tested on .NET Core 2.0, .NET 4.
 
 ## Usage
 
-For more information on how to use these components see the online [Steeltoe documentation](http://steeltoe.io/).
+For more information on how to use these components see the online [Steeltoe documentation](https://steeltoe.io/).
 
 ## Nuget Feeds
 
 All new development is done on the dev branch. More stable versions of the packages can be found on the master branch. The latest prebuilt packages from each branch can be found on one of two MyGet feeds. Released version can be found on nuget.org.
 
-[Development feed (Less Stable)](https://www.myget.org/gallery/steeltoedev) - https://www.myget.org/gallery/steeltoedev
-
-[Master feed (Stable)](https://www.myget.org/gallery/steeltoemaster) - https://www.myget.org/gallery/steeltoemaster
-
-[Release or Release Candidate feed](https://www.nuget.org/) - https://www.nuget.org/
+- [Development feed (Less Stable)](https://www.myget.org/gallery/steeltoedev)
+- [Master feed (Stable)](https://www.myget.org/gallery/steeltoemaster)
+- [Release or Release Candidate feed](https://www.nuget.org/)
 
 ## Building Pre-requisites
 

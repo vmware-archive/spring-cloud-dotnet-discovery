@@ -25,6 +25,7 @@ namespace Pivotal.Discovery.Eureka
     public class PivotalEurekaHttpClient : Steeltoe.Discovery.Eureka.Transport.EurekaHttpClient
     {
         private const int DEFAULT_GETACCESSTOKEN_TIMEOUT = 10000; // Milliseconds
+        private static readonly char[] COLON_DELIMIT = new char[] { ':' };
 
         private IOptionsMonitor<EurekaClientOptions> _configOptions;
 
@@ -61,7 +62,22 @@ namespace Pivotal.Discovery.Eureka
 
         protected override HttpRequestMessage GetRequestMessage(HttpMethod method, Uri requestUri)
         {
-            var request = HttpClientHelper.GetRequestMessage(method, requestUri.ToString(), FetchAccessToken);
+            string rawUri = requestUri.GetComponents(UriComponents.HttpRequestUrl, UriFormat.Unescaped);
+            string rawUserInfo = requestUri.GetComponents(UriComponents.UserInfo, UriFormat.Unescaped);
+            var request = new HttpRequestMessage(method, rawUri);
+
+            if (!string.IsNullOrEmpty(rawUserInfo) && rawUserInfo.IndexOfAny(COLON_DELIMIT) > 0)
+            {
+                string[] userInfo = GetUserInfo(rawUserInfo);
+                if (userInfo.Length >= 2)
+                {
+                    request = HttpClientHelper.GetRequestMessage(method, rawUri, userInfo[0], userInfo[1]);
+                }
+            }
+            else
+            {
+                request = HttpClientHelper.GetRequestMessage(method, rawUri, FetchAccessToken);
+            }
 
             foreach (var header in _headers)
             {
@@ -70,6 +86,17 @@ namespace Pivotal.Discovery.Eureka
 
             request.Headers.Add("Accept", "application/json");
             return request;
+        }
+
+        private string[] GetUserInfo(string userInfo)
+        {
+            string[] result = null;
+            if (!string.IsNullOrEmpty(userInfo))
+            {
+                result = userInfo.Split(COLON_DELIMIT);
+            }
+
+            return result;
         }
     }
 }
