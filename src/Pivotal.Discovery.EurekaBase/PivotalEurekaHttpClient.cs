@@ -37,10 +37,11 @@ namespace Pivotal.Discovery.Eureka
             }
         }
 
-        public PivotalEurekaHttpClient(IOptionsMonitor<EurekaClientOptions> config, ILoggerFactory logFactory = null)
+        public PivotalEurekaHttpClient(IOptionsMonitor<EurekaClientOptions> config, IEurekaDiscoveryClientHandlerProvider handlerProvider = null, ILoggerFactory logFactory = null)
         {
             _config = null;
             _configOptions = config ?? throw new ArgumentNullException(nameof(config));
+            _handlerProvider = handlerProvider;
             Initialize(new Dictionary<string, string>(), logFactory);
         }
 

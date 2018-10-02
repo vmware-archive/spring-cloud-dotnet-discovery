@@ -26,8 +26,9 @@ namespace Pivotal.Discovery.Eureka
             IOptionsMonitor<EurekaInstanceOptions> instConfig,
             EurekaApplicationInfoManager appInfoManager,
             IEurekaHttpClient httpClient = null,
-            ILoggerFactory logFactory = null)
-                : base(clientConfig, instConfig, appInfoManager, new PivotalEurekaHttpClient(clientConfig, logFactory), logFactory)
+            ILoggerFactory logFactory = null,
+            IEurekaDiscoveryClientHandlerProvider handlerProvider = null)
+                : base(clientConfig, instConfig, appInfoManager, new PivotalEurekaHttpClient(clientConfig, handlerProvider, logFactory), logFactory)
         {
         }
     }
