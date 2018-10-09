@@ -23,8 +23,8 @@ namespace Pivotal.Discovery.EurekaBase.Test
 {
     public class TestPivotalEurekaHttpClient : PivotalEurekaHttpClient
     {
-        public TestPivotalEurekaHttpClient(IOptionsMonitor<EurekaClientOptions> config, ILoggerFactory logFactory = null)
-            : base(config, logFactory)
+        public TestPivotalEurekaHttpClient(IOptionsMonitor<EurekaClientOptions> config, IEurekaDiscoveryClientHandlerProvider handlerProvider = null, ILoggerFactory logFactory = null)
+            : base(config, handlerProvider, logFactory)
         {
         }
 
