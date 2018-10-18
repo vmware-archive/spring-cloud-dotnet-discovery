@@ -15,6 +15,7 @@ test_script:
   - ps: steeltoe-ci\scripts\appveyor_tests.ps1
 build_script:
   - ps: steeltoe-ci\scripts\appveyor_build.ps1
+  - ps: steeltoe-ci\scripts\sign-packages.ps1
 artifacts:
   - path: '**\*.nupkg'
 environment:
@@ -24,6 +25,8 @@ environment:
   PackageReferencesToUpdate: 
   github_access_token:
     secure: ko4J3M/czguVI9AbVdkv5qZuj3Wuzts5nkz/6cypneFkQGWJXDs8Akg7xOEMu8qU
+  SignClientUser: Tt9mySuspn9dHJOLKMoGxrNJvJbpBrWK44UI9Qc9+eNilYdoukHZ3jUF06pl2r60
+  SignClientSecret: ZmCTr+SyfQtewSNsiB8OMISmQJp8RfjRSK0Dvg60iTQ=
 deploy:
 - provider: NuGet
   skip_symbols: false
