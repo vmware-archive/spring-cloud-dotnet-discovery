@@ -15,18 +15,16 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Steeltoe.Common.Discovery;
+using System;
 
 namespace Pivotal.Discovery.Client
 {
+    [Obsolete("Use the Steeltoe.Discovery.Client packages!")]
     public static class DiscoveryApplicationBuilderExtensions
     {
         public static IApplicationBuilder UseDiscoveryClient(this IApplicationBuilder app)
         {
-            var service = app.ApplicationServices.GetRequiredService<IDiscoveryClient>();
-
-            // make sure that the lifcycle object is created
-            var lifecycle = app.ApplicationServices.GetRequiredService<IDiscoveryLifecycle>();
-            return app;
+            return Steeltoe.Discovery.Client.DiscoveryApplicationBuilderExtensions.UseDiscoveryClient(app);
         }
     }
 }

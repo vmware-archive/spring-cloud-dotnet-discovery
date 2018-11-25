@@ -16,9 +16,11 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Steeltoe.Discovery.Eureka;
 using Steeltoe.Discovery.Eureka.Transport;
+using System;
 
 namespace Pivotal.Discovery.Eureka
 {
+    [Obsolete("Use the Steeltoe.Discovery.Client packages!")]
     public class PivotalEurekaDiscoveryClient : Steeltoe.Discovery.Eureka.EurekaDiscoveryClient
     {
         public PivotalEurekaDiscoveryClient(

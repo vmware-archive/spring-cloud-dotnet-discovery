@@ -364,10 +364,10 @@ namespace Pivotal.Discovery.Eureka.Client.Test
             Assert.Equal(6, map.Count);
             Assert.Equal("bar", map["foo"]);
             Assert.Equal("foo", map["bar"]);
-            Assert.Equal("instance_id", map[PivotalEurekaConfigurer.INSTANCE_ID]);
-            Assert.Equal("ac923014-93a5-4aee-b934-a043b241868b", map[PivotalEurekaConfigurer.CF_APP_GUID]);
-            Assert.Equal("1", map[PivotalEurekaConfigurer.CF_INSTANCE_INDEX]);
-            Assert.Equal(PivotalEurekaConfigurer.UNKNOWN_ZONE, map[PivotalEurekaConfigurer.ZONE]);
+            Assert.Equal("instance_id", map[EurekaPostConfigurer.INSTANCE_ID]);
+            Assert.Equal("ac923014-93a5-4aee-b934-a043b241868b", map[EurekaPostConfigurer.CF_APP_GUID]);
+            Assert.Equal("1", map[EurekaPostConfigurer.CF_INSTANCE_INDEX]);
+            Assert.Equal(EurekaPostConfigurer.UNKNOWN_ZONE, map[EurekaPostConfigurer.ZONE]);
         }
 
         [Fact]
@@ -576,10 +576,10 @@ namespace Pivotal.Discovery.Eureka.Client.Test
             Assert.Equal(6, map.Count);
             Assert.Equal("bar", map["foo"]);
             Assert.Equal("foo", map["bar"]);
-            Assert.Equal("instance_id", map[PivotalEurekaConfigurer.INSTANCE_ID]);
-            Assert.Equal("ac923014-93a5-4aee-b934-a043b241868b", map[PivotalEurekaConfigurer.CF_APP_GUID]);
-            Assert.Equal("1", map[PivotalEurekaConfigurer.CF_INSTANCE_INDEX]);
-            Assert.Equal(PivotalEurekaConfigurer.UNKNOWN_ZONE, map[PivotalEurekaConfigurer.ZONE]);
+            Assert.Equal("instance_id", map[EurekaPostConfigurer.INSTANCE_ID]);
+            Assert.Equal("ac923014-93a5-4aee-b934-a043b241868b", map[EurekaPostConfigurer.CF_APP_GUID]);
+            Assert.Equal("1", map[EurekaPostConfigurer.CF_INSTANCE_INDEX]);
+            Assert.Equal(EurekaPostConfigurer.UNKNOWN_ZONE, map[EurekaPostConfigurer.ZONE]);
         }
 
         [Fact]
@@ -790,10 +790,10 @@ namespace Pivotal.Discovery.Eureka.Client.Test
             Assert.Equal(6, map.Count);
             Assert.Equal("bar", map["foo"]);
             Assert.Equal("foo", map["bar"]);
-            Assert.Equal("instance_id", map[PivotalEurekaConfigurer.INSTANCE_ID]);
-            Assert.Equal("ac923014-93a5-4aee-b934-a043b241868b", map[PivotalEurekaConfigurer.CF_APP_GUID]);
-            Assert.Equal("1", map[PivotalEurekaConfigurer.CF_INSTANCE_INDEX]);
-            Assert.Equal(PivotalEurekaConfigurer.UNKNOWN_ZONE, map[PivotalEurekaConfigurer.ZONE]);
+            Assert.Equal("instance_id", map[EurekaPostConfigurer.INSTANCE_ID]);
+            Assert.Equal("ac923014-93a5-4aee-b934-a043b241868b", map[EurekaPostConfigurer.CF_APP_GUID]);
+            Assert.Equal("1", map[EurekaPostConfigurer.CF_INSTANCE_INDEX]);
+            Assert.Equal(EurekaPostConfigurer.UNKNOWN_ZONE, map[EurekaPostConfigurer.ZONE]);
         }
     }
 }

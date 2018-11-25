@@ -27,6 +27,7 @@ using System.Threading;
 
 namespace Pivotal.Discovery.Client
 {
+    [Obsolete("Use the Steeltoe.Discovery.Client packages!")]
     public static class DiscoveryContainerBuilderExtensions
     {
         public const string EUREKA_PREFIX = "eureka";
