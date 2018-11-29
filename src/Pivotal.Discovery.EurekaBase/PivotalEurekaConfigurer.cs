@@ -19,14 +19,16 @@ using System;
 
 namespace Pivotal.Discovery.Eureka
 {
-    [Obsolete("Use the Steeltoe.Discovery.Client packages!")]
+    [Obsolete("Use the Steeltoe.Discovery.EurekaBase packages!")]
     public class PivotalEurekaConfigurer
     {
+        [Obsolete("Use the Steeltoe.Discovery.EurekaBase packages!")]
         public static void UpdateConfiguration(IConfiguration config, EurekaServiceInfo si, EurekaClientOptions clientOptions)
         {
             Steeltoe.Discovery.Eureka.EurekaPostConfigurer.UpdateConfiguration(config, si, clientOptions);
         }
 
+        [Obsolete("Use the Steeltoe.Discovery.EurekaBase packages!")]
         public static void UpdateConfiguration(IConfiguration config, EurekaServiceInfo si, EurekaInstanceOptions instOptions)
         {
             Steeltoe.Discovery.Eureka.EurekaPostConfigurer.UpdateConfiguration(config, si, instOptions);

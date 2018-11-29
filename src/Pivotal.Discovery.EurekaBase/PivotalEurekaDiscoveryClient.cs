@@ -20,7 +20,7 @@ using System;
 
 namespace Pivotal.Discovery.Eureka
 {
-    [Obsolete("Use the Steeltoe.Discovery.Client packages!")]
+    [Obsolete("Use the Steeltoe.Discovery.EurekaBase packages!")]
     public class PivotalEurekaDiscoveryClient : Steeltoe.Discovery.Eureka.EurekaDiscoveryClient
     {
         public PivotalEurekaDiscoveryClient(

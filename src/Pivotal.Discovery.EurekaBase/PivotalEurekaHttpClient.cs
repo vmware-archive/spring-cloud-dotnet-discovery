@@ -19,7 +19,7 @@ using System;
 
 namespace Pivotal.Discovery.Eureka
 {
-    [Obsolete("Use the Steeltoe.Discovery.Client packages!")]
+    [Obsolete("Use the Steeltoe.Discovery.EurekaBase packages!")]
     public class PivotalEurekaHttpClient : Steeltoe.Discovery.Eureka.Transport.EurekaHttpClient
     {
         public PivotalEurekaHttpClient(IOptionsMonitor<EurekaClientOptions> config, IEurekaDiscoveryClientHandlerProvider handlerProvider = null, ILoggerFactory logFactory = null)

@@ -27,11 +27,12 @@ using System.Threading;
 
 namespace Pivotal.Discovery.Client
 {
-    [Obsolete("Use the Steeltoe.Discovery.Client packages!")]
+    [Obsolete("Use the Steeltoe.Discovery.ClientAutofac packages!")]
     public static class DiscoveryContainerBuilderExtensions
     {
         public const string EUREKA_PREFIX = "eureka";
 
+        [Obsolete("Use the Steeltoe.Discovery.ClientAutofac packages!")]
         public static void RegisterDiscoveryClient(this ContainerBuilder container, DiscoveryOptions discoveryOptions, IDiscoveryLifecycle lifecycle = null)
         {
             if (container == null)
@@ -71,6 +72,7 @@ namespace Pivotal.Discovery.Client
             }
         }
 
+        [Obsolete("Use the Steeltoe.Discovery.ClientAutofac packages!")]
         public static void RegisterDiscoveryClient(this ContainerBuilder container, Action<DiscoveryOptions> setupOptions,  IDiscoveryLifecycle lifecycle = null)
         {
             if (container == null)
@@ -89,6 +91,7 @@ namespace Pivotal.Discovery.Client
             container.RegisterDiscoveryClient(options, lifecycle);
         }
 
+        [Obsolete("Use the Steeltoe.Discovery.ClientAutofac packages!")]
         public static void RegisterDiscoveryClient(this ContainerBuilder container, IConfiguration config, IDiscoveryLifecycle lifecycle = null)
         {
             if (container == null)
@@ -106,6 +109,7 @@ namespace Pivotal.Discovery.Client
             AddDiscoveryServices(container, info, config, lifecycle);
         }
 
+        [Obsolete("Use the Steeltoe.Discovery.ClientAutofac packages!")]
         public static void RegisterDiscoveryClient(
             this ContainerBuilder container,
             IConfiguration config,
@@ -132,6 +136,7 @@ namespace Pivotal.Discovery.Client
             AddDiscoveryServices(container, info, config, lifecycle);
         }
 
+        [Obsolete("Use the Steeltoe.Discovery.ClientAutofac packages!")]
         public static void StartDiscoveryClient(this IContainer container)
         {
             if (container == null)

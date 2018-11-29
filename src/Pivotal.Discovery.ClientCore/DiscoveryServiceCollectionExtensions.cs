@@ -32,6 +32,7 @@ namespace Pivotal.Discovery.Client
     {
         public const string EUREKA_PREFIX = "eureka";
 
+        [Obsolete("Use the Steeltoe.Discovery.Client packages!")]
         public static IServiceCollection AddDiscoveryClient(this IServiceCollection services, DiscoveryOptions discoveryOptions, IDiscoveryLifecycle lifecycle = null)
         {
             if (services == null)
@@ -73,6 +74,7 @@ namespace Pivotal.Discovery.Client
             return services;
         }
 
+        [Obsolete("Use the Steeltoe.Discovery.Client packages!")]
         public static IServiceCollection AddDiscoveryClient(this IServiceCollection services, Action<DiscoveryOptions> setupOptions, IDiscoveryLifecycle lifecycle = null)
         {
             if (services == null)
@@ -91,6 +93,7 @@ namespace Pivotal.Discovery.Client
             return services.AddDiscoveryClient(options, lifecycle);
         }
 
+        [Obsolete("Use the Steeltoe.Discovery.Client packages!")]
         public static IServiceCollection AddDiscoveryClient(this IServiceCollection services, IConfiguration config, IDiscoveryLifecycle lifecycle = null)
         {
             if (services == null)
@@ -110,6 +113,7 @@ namespace Pivotal.Discovery.Client
             return services;
         }
 
+        [Obsolete("Use the Steeltoe.Discovery.Client packages!")]
         public static IServiceCollection AddDiscoveryClient(this IServiceCollection services, IConfiguration config, string serviceName, IDiscoveryLifecycle lifecycle = null)
         {
             if (services == null)

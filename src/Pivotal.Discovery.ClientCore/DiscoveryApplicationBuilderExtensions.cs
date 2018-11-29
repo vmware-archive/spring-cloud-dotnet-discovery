@@ -22,6 +22,7 @@ namespace Pivotal.Discovery.Client
     [Obsolete("Use the Steeltoe.Discovery.Client packages!")]
     public static class DiscoveryApplicationBuilderExtensions
     {
+        [Obsolete("Use the Steeltoe.Discovery.Client packages!")]
         public static IApplicationBuilder UseDiscoveryClient(this IApplicationBuilder app)
         {
             return Steeltoe.Discovery.Client.DiscoveryApplicationBuilderExtensions.UseDiscoveryClient(app);
