@@ -27,12 +27,12 @@ using System.Threading;
 
 namespace Pivotal.Discovery.Client
 {
-    [Obsolete("Use the Steeltoe.Discovery.Client packages!")]
+    [Obsolete("Use the Steeltoe.Discovery.ClientCore packages!")]
     public static class DiscoveryServiceCollectionExtensions
     {
         public const string EUREKA_PREFIX = "eureka";
 
-        [Obsolete("Use the Steeltoe.Discovery.Client packages!")]
+        [Obsolete("Use the Steeltoe.Discovery.ClientCore packages!")]
         public static IServiceCollection AddDiscoveryClient(this IServiceCollection services, DiscoveryOptions discoveryOptions, IDiscoveryLifecycle lifecycle = null)
         {
             if (services == null)
@@ -74,7 +74,7 @@ namespace Pivotal.Discovery.Client
             return services;
         }
 
-        [Obsolete("Use the Steeltoe.Discovery.Client packages!")]
+        [Obsolete("Use the Steeltoe.Discovery.ClientCore packages!")]
         public static IServiceCollection AddDiscoveryClient(this IServiceCollection services, Action<DiscoveryOptions> setupOptions, IDiscoveryLifecycle lifecycle = null)
         {
             if (services == null)
@@ -93,7 +93,7 @@ namespace Pivotal.Discovery.Client
             return services.AddDiscoveryClient(options, lifecycle);
         }
 
-        [Obsolete("Use the Steeltoe.Discovery.Client packages!")]
+        [Obsolete("Use the Steeltoe.Discovery.ClientCore packages!")]
         public static IServiceCollection AddDiscoveryClient(this IServiceCollection services, IConfiguration config, IDiscoveryLifecycle lifecycle = null)
         {
             if (services == null)
@@ -113,7 +113,7 @@ namespace Pivotal.Discovery.Client
             return services;
         }
 
-        [Obsolete("Use the Steeltoe.Discovery.Client packages!")]
+        [Obsolete("Use the Steeltoe.Discovery.ClientCore packages!")]
         public static IServiceCollection AddDiscoveryClient(this IServiceCollection services, IConfiguration config, string serviceName, IDiscoveryLifecycle lifecycle = null)
         {
             if (services == null)

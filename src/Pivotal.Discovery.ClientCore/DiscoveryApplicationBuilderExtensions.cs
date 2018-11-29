@@ -19,10 +19,10 @@ using System;
 
 namespace Pivotal.Discovery.Client
 {
-    [Obsolete("Use the Steeltoe.Discovery.Client packages!")]
+    [Obsolete("Use the Steeltoe.Discovery.ClientCore packages!")]
     public static class DiscoveryApplicationBuilderExtensions
     {
-        [Obsolete("Use the Steeltoe.Discovery.Client packages!")]
+        [Obsolete("Use the Steeltoe.Discovery.ClientCore packages!")]
         public static IApplicationBuilder UseDiscoveryClient(this IApplicationBuilder app)
         {
             return Steeltoe.Discovery.Client.DiscoveryApplicationBuilderExtensions.UseDiscoveryClient(app);
