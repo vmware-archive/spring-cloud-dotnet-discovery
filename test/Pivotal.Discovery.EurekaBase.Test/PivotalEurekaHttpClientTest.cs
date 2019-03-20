@@ -25,7 +25,7 @@ namespace Pivotal.Discovery.EurekaBase.Test
         public void GetRequestMessage_No_Auth_When_Creds_Not_In_Url()
         {
             // arrange
-            var clientOptions = new EurekaClientOptions { ServiceUrl = "http://boo:123/eureka/" };
+            var clientOptions = new EurekaClientOptions { ServiceUrl = "https://boo:123/eureka/" };
             var optionsMonitor = new TestOptionMonitorWrapper<EurekaClientOptions>(clientOptions);
             var client = new TestPivotalEurekaHttpClient(optionsMonitor);
 
@@ -34,7 +34,7 @@ namespace Pivotal.Discovery.EurekaBase.Test
 
             // assert
             Assert.Equal(HttpMethod.Post, result.Method);
-            Assert.Equal(new Uri("http://boo:123/eureka/"), result.RequestUri);
+            Assert.Equal(new Uri("https://boo:123/eureka/"), result.RequestUri);
             Assert.False(result.Headers.Contains("Authorization"));
         }
 
@@ -42,7 +42,7 @@ namespace Pivotal.Discovery.EurekaBase.Test
         public void GetRequestMessage_Adds_Auth_When_Creds_In_Url()
         {
             // arrange
-            var clientOptions = new EurekaClientOptions { ServiceUrl = "http://user:pass@boo:123/eureka/" };
+            var clientOptions = new EurekaClientOptions { ServiceUrl = "https://user:pass@boo:123/eureka/" };
             var optionsMonitor = new TestOptionMonitorWrapper<EurekaClientOptions>(clientOptions);
             var client = new TestPivotalEurekaHttpClient(optionsMonitor);
 
@@ -51,7 +51,7 @@ namespace Pivotal.Discovery.EurekaBase.Test
 
             // assert
             Assert.Equal(HttpMethod.Post, result.Method);
-            Assert.Equal(new Uri("http://boo:123/eureka/"), result.RequestUri);
+            Assert.Equal(new Uri("https://boo:123/eureka/"), result.RequestUri);
             Assert.True(result.Headers.Contains("Authorization"));
         }
     }
