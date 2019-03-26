@@ -4,7 +4,7 @@ A Service Registry provides a database which applications can use in implementin
 
 There are several popular options for Service Registries. Netflix built and then open-sourced their own service registry, Eureka. Another relatively new, but increasingly popular option is Consul.
 
-This repo contains various packages for interacting with Service Registries.  The [Pivotal.Discovery.Client](https://github.com/pivotal-cf/spring-cloud-dotnet-discovery/tree/master/src/Pivotal.Discovery.Client) provides a configurable generalized interface to Service Discovery and Registration.  Currently you can use the client to work with the [Spring Cloud Services Eureka Server](http://docs.pivotal.io/spring-cloud-services/service-registry/) as a Service Registry. In the near future support will be added for others.
+This repo contains various packages for interacting with Service Registries.  The [Pivotal.Discovery.Client](https://github.com/pivotal-cf/spring-cloud-dotnet-discovery/tree/master/src/Pivotal.Discovery.Client) provides a configurable generalized interface to Service Discovery and Registration.  Currently you can use the client to work with the [Spring Cloud Services Eureka Server](https://docs.pivotal.io/spring-cloud-services/service-registry/) as a Service Registry. In the near future support will be added for others.
 
 Windows Master:  [![AppVeyor Master](https://ci.appveyor.com/api/projects/status/84oangqh3o4fyt7b/branch/master?svg=true)](https://ci.appveyor.com/project/steeltoe/spring-cloud-dotnet-discovery/branch/master)
 
