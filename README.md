@@ -3,7 +3,7 @@ A Service Registry provides a database which applications can use in implementin
 
 There are several popular options for Service Registries. Netflix built and then open-sourced their own service registry, Eureka. Another relatively new, but increasingly popular option is Consul. 
 
-This repo contains various packages for interacting with Service Registries.  The [Pivotal.Discovery.Client](https://github.com/pivotal-cf/spring-cloud-dotnet-discovery/tree/master/src/Pivotal.Discovery.Client) provides a configurable generalized interface to Service Discovery and Registration.  Currently you can use the client to work with the [Spring Cloud Services Eureka Server](http://docs.pivotal.io/spring-cloud-services/service-registry/) as a Service Registry. In the near future support will be added for others.
+This repo contains various packages for interacting with Service Registries.  The [Pivotal.Discovery.Client](https://github.com/pivotal-cf/spring-cloud-dotnet-discovery/tree/master/src/Pivotal.Discovery.Client) provides a configurable generalized interface to Service Discovery and Registration.  Currently you can use the client to work with the [Spring Cloud Services Eureka Server](https://docs.pivotal.io/spring-cloud-services/service-registry/) as a Service Registry. In the near future support will be added for others.
 
 Windows Master:  [![AppVeyor Master](https://ci.appveyor.com/api/projects/status/84oangqh3o4fyt7b/branch/master?svg=true)](https://ci.appveyor.com/project/steeltoe/spring-cloud-dotnet-discovery/branch/master)
 
@@ -21,7 +21,7 @@ While the primary usage of the providers is intended to be with ASP.NET Core app
 Currently all of the code and samples have been tested on .NET Core 1.1, .NET 4.5.1/4.6.x, and on ASP.NET Core 1.1.0.
 
 # Usage
-For more information on how to use these components see the online [Steeltoe documentation](http://steeltoe.io/).
+For more information on how to use these components see the online [Steeltoe documentation](https://steeltoe.io/).
 
 # Nuget Feeds
 All new development is done on the dev branch. More stable versions of the packages can be found on the master branch. The latest prebuilt packages from each branch can be found on one of two MyGet feeds. Released version can be found on nuget.org.
